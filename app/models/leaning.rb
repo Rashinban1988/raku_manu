@@ -1,0 +1,2 @@
+class Leaning < ApplicationRecord
+end

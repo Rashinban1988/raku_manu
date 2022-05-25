@@ -1,0 +1,2 @@
+class ReturnComment < ApplicationRecord
+end
