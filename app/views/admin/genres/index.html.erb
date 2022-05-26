@@ -1,4 +1,4 @@
-<section class="hero is-small is-info">
+<section class="hero is-warning">
   <div class="hero-body">
     <div class="container">
       <h2 class="title">
@@ -12,25 +12,24 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-6">
+
         <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
+          <div class="field">
+            <%= f.label :name, "ジャンルを追加:", class: "label" %>
+            <p class="control has-icons-left">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "ジャンル名", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fa fa-edit"></i>
+              </span>
+            </p>
+          </div>
 
-
-        <div class="field">
-          <%= f.label :name, "ジャンル名:", class: "label" %>
-          <p class="control has-icons-left">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "name", class: "input" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-pencil"></i>
-            </span>
-          </p>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "追加", class: "button is-success" %>
-        </div>
+          <div class="actions">
+            <%= f.submit "追加", class: "button is-success" %>
+          </div>
         <% end %>
-        
-        <section class="hero is-small is-info m-3">
+
+        <section class="hero is-small is-link m-4">
           <div class="hero-body">
             <div class="container">
               <h2 class="title">
@@ -40,19 +39,21 @@
           </div>
         </section>
 
-        <div class="field">
-          <% @genres.each do |genre| %>
-            <div class="control has-icons-left is-centered">
-              <span class="is-centered">
-                <%= genre.name %>
-              </span>
-              <%= link_to edit_admin_genre_path(genre) do %>
-                <p class="icon is-small is-right">
-                  <i class="fas fa-edit"></i>
-                </p>
-              <% end %>
-            </div>
-          <% end %>
+        <div>
+          <div class="columns is-multiline is-mobile">
+            <% @genres.each do |genre| %>
+              <div class="column is-full">
+                <%= link_to edit_admin_genre_path(genre) do %>
+                  <span class="is-centered">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <%= genre.name %>
+                  </span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
 
       </div>

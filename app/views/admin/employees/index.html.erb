@@ -1,2 +1,52 @@
-<h1>Admin::Employees#index</h1>
-<p>Find me in app/views/admin/employees/index.html.erb</p>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        従業員一覧
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>ID</th>
+              <th>氏名</th>
+              <th>電話番号</th>
+              <th>在籍</th>
+            </tr>
+          </thead>
+          <% @employees.each do |employee| %>
+          <tbody>
+            <tr>
+              <td><%= employee.id %></td>
+              <td>
+                <%= link_to admin_employee_path(employee.id) do %>
+                <%= employee.name %>
+                <% end %>
+              </td>
+              <td><%= employee.telephone_number %></td>
+              <% if employee.is_deleted == true %>
+              <td class="text-secondary">
+                <%= employee.is_deleted %>
+              </td>
+              <% else %>
+              <td class="text-success">
+                <%= employee.is_deleted %>
+              </td>
+              <% end %>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>

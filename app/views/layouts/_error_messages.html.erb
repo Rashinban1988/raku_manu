@@ -1,0 +1,10 @@
+<% if resource.errors.any? %>
+  <div id="notification is-danger">
+    <h3>エラーが発生しました。<br>以下ご確認お願いいたします。</h3>
+    <ul>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

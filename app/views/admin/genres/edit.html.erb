@@ -1,2 +1,35 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        ジャンル編集
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+
+        <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
+          <div class="field">
+            <%= f.label :name, "ジャンルを追加:", class: "label" %>
+            <p class="control has-icons-left">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "ジャンル名", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fa fa-edit"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "追加", class: "button is-success" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -34,6 +34,7 @@ class DeviseCreateEmployees < ActiveRecord::Migration[6.1]
 
 
       t.string :name
+      t.string :telephone_number
       t.boolean :is_deleted,                      default: false
       t.timestamps null: false
     end

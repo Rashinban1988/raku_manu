@@ -26,6 +26,16 @@
         </div>
 
         <div class="field">
+          <%= f.label :telephone_number, class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", :placeholder => "telephone_number", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-phone"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
           <%= f.label :email, class: "label" %>
           <p class="control has-icons-left">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
