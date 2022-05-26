@@ -1,2 +1,61 @@
-<h1>Admin::Genres#index</h1>
-<p>Find me in app/views/admin/genres/index.html.erb</p>
+<section class="hero is-small is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        ジャンル管理
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
+
+
+        <div class="field">
+          <%= f.label :name, "ジャンル名:", class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "name", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-pencil"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "追加", class: "button is-success" %>
+        </div>
+        <% end %>
+        
+        <section class="hero is-small is-info m-3">
+          <div class="hero-body">
+            <div class="container">
+              <h2 class="title">
+                ジャンル一覧
+              </h2>
+            </div>
+          </div>
+        </section>
+
+        <div class="field">
+          <% @genres.each do |genre| %>
+            <div class="control has-icons-left is-centered">
+              <span class="is-centered">
+                <%= genre.name %>
+              </span>
+              <%= link_to edit_admin_genre_path(genre) do %>
+                <p class="icon is-small is-right">
+                  <i class="fas fa-edit"></i>
+                </p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

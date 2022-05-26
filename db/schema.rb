@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 2022_05_24_083128) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "manual_id"
+    t.string "comment"
+    t.boolean "is_desolved", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -63,6 +67,8 @@ ActiveRecord::Schema.define(version: 2022_05_24_083128) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
+    t.boolean "is_deleted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
@@ -70,21 +76,31 @@ ActiveRecord::Schema.define(version: 2022_05_24_083128) do
   end
 
   create_table "genres", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "leanings", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "manual_id"
+    t.boolean "is_learned", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "manuals", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "task_name"
+    t.string "description"
+    t.boolean "is_draft", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "return_comments", force: :cascade do |t|
+    t.integer "comment_id"
+    t.string "return_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

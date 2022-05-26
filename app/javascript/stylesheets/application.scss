@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.img-logo {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.nav.navbar {
+  padding: none;
+}

@@ -4,17 +4,18 @@ Rails.application.routes.draw do
   devise_for :admin, controllers: {
     sessions:      "admin/sessions",
     passwords:     "admin/passwords",
-    registrations: "admin/registrations"
   }
 
-  devise_for :employees, controllers: {
-    sessions:      "employees/sessions",
-    passwords:     "employees/passwords",
-    registrations: "employees/registrations"
+  devise_for :employee, controllers: {
+    sessions:      "employee/sessions",
+    passwords:     "employee/passwords",
+    registrations: "employee/registrations"
   }
+
+
 
   namespace :admin do
-    get "top" => "homes/top", as: "top"
+    get "top" => "homes#top", as: "top"
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :employees, only: [:index, :show, :edit, :update]
     resources :comments, only: [:index, :show]
@@ -25,8 +26,10 @@ Rails.application.routes.draw do
     patch "manuals/re_draft" => "manuals#re_draft", as: "re_draft_manuals"
   end
 
+  root 'public/homes#top'
+
   namespace :public do
-    root 'homes#top'
+
     get '/about' => 'homes#about'
     resources :employees, only: [:show, :edit, :update]
     resources :comments, only: [:show, :create, :update, :destroy]
