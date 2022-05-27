@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     registrations: "employee/registrations"
   }
 
-
+  devise_scope :employee do
+    post "/employee/guest_sign_in", to: "employee/sessions#new_guest"
+  end
 
   namespace :admin do
     get "top" => "homes#top", as: "top"
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
   namespace :public do
 
     get '/about' => 'homes#about'
+    post "/homes/guest_sign_in", to: "homes#new_guest"
     resources :employees, only: [:show, :edit, :update]
     resources :comments, only: [:show, :create, :update, :destroy]
     resources :learnings, only: [:show]

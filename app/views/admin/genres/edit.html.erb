@@ -15,7 +15,7 @@
 
         <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
           <div class="field">
-            <%= f.label :name, "ジャンルを追加:", class: "label" %>
+            <%= f.label :name, "ジャンル名を変更:", class: "label" %>
             <p class="control has-icons-left">
               <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "ジャンル名", class: "input" %>
               <span class="icon is-small is-left">
@@ -25,7 +25,7 @@
           </div>
 
           <div class="actions">
-            <%= f.submit "追加", class: "button is-success" %>
+            <%= f.submit "変更", class: "button is-success" %>
           </div>
         <% end %>
 

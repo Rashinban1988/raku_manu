@@ -24,8 +24,15 @@ class Employee::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # endprivate
+
+  def new_guest
+    employee = Employee.guest
+    sign_in employee
+    redirect_to root_path, notice: "ゲストユーザーとしてログインしました。"
+  end
+
   private
-  
+
   def after_sign_in_path_for(resource)
     public_employee_path(current_employee)
   end
@@ -33,5 +40,5 @@ class Employee::SessionsController < Devise::SessionsController
   def after_sign_up_path_for(resource)
     public_employee_path(current_employee)
   end
-  
+
 end

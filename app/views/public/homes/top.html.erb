@@ -1,2 +1,51 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<section class="hero is-primary is-medium">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <!--<a class="navbar-item">-->
+          <!--  楽ま～にゅ-->
+          <!--</a>-->
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <!--<a class="navbar-item is-active">-->
+            <!--  Home-->
+            <!--</a>-->
+            <!--<a class="navbar-item">-->
+            <!--  Examples-->
+            <!--</a>-->
+            <!--<a class="navbar-item">-->
+            <!--  Documentation-->
+            <!--</a>-->
+            <span class="navbar-item">
+              <%= link_to employee_guest_sign_in_path, method: :post, class: "button is-primary is-inverted" do %>
+                <span class="icon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <span>ゲストログイン（閲覧用）</span>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+    <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        楽ま～にゅ
+      </p>
+      <p class="subtitle">
+        業務マニュアルの「作成」・「共有」・「管理」を簡単に店長と従業員双方に向けた、業務習得スピードを加速させる動画コミュニティサイトです。
+      </p>
+    </div>
+  </div>

@@ -1,5 +1,6 @@
 class Admin::ManualsController < ApplicationController
   def index
+    @manuals = Manual.all
   end
 
   def new
