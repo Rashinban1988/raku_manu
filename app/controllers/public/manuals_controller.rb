@@ -13,12 +13,9 @@ class Public::ManualsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.employee_id = current_employee.id
-    p "----------------------------------------------------------------------------------"
-    p @comment
     if @comment.save
       redirect_to public_manual_path(@comment.manual_id), notice: "質問を投稿しました"
     else
-      p @comment.errors
       @manual = @comment.manual
       @manuals = Manual.all
       @comments = Comment.all
