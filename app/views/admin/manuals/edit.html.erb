@@ -1,2 +1,23 @@
-<h1>Admin::Manuals#edit</h1>
-<p>Find me in app/views/admin/manuals/edit.html.erb</p>
+<%= form_with model: @manual, url: admin_manual_path, method: :patch do |f| %>
+  <%= f.label :video %>
+  <%= f.file_field :video %><br>
+
+  <%= f.label :genre, "ジャンル" %>
+  <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %><br>
+
+  <%= f.label :task_name, "業務名" %>
+  <%= f.text_field :task_name %><br>
+
+  <%= f.label :description, "説明文" %>
+  <%= f.text_field :description %><br>
+
+  <%= f.label "下書き" %>
+  <%= f.radio_button :is_draft, "true" %>
+  <%= f.label :is_draft, "下書き" %>
+  <%= f.radio_button :is_draft, "false" %>
+  <%= f.label :is_draft, "完了" %><br>
+
+  <%= f.submit %>
+
+<% end %>
+<%= link_to "削除する", admin_manual_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"}  %>

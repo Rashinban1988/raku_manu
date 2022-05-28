@@ -1,3 +1,22 @@
 <%= form_with model: @manual, url: admin_manuals_path, method: :post do |f| %>
+  <%= f.label :video %>
+  <%= f.file_field :video %><br>
 
+  <%= f.label :genre, "ジャンル" %>
+  <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %><br>
 
+  <%= f.label :task_name, "業務名" %>
+  <%= f.text_field :task_name %><br>
+
+  <%= f.label :description, "説明文" %>
+  <%= f.text_field :description %><br>
+
+  <%= f.label "下書き" %>
+  <%= f.radio_button :is_draft, "true" %>
+  <%= f.label :is_draft, "下書き" %>
+  <%= f.radio_button :is_draft, "false" %>
+  <%= f.label :is_draft, "完了" %><br>
+
+  <%= f.submit %>
+
+<% end %>

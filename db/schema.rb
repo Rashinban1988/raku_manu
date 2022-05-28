@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_083128) do
+ActiveRecord::Schema.define(version: 2022_05_28_113146) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 2022_05_24_083128) do
     t.integer "employee_id"
     t.integer "manual_id"
     t.boolean "is_learned", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "learnings", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "manual_id"
+    t.integer "is_learned", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

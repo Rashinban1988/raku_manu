@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Employee::RegistrationsController < Devise::RegistrationsController
-  beforore_action :check_guest, only: :destroy
+  beforore_action :check_guest, only: %i[update destroy]
 
   def check_guest
     if resource.email == "guest@example.com"
-      redirect_to root_path, alert: "ゲストユーザーは削除できません"
+      redirect_to root_path, alert: "ゲストユーザーの編集・削除できません"
     end
   end
 

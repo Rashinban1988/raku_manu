@@ -30,6 +30,7 @@ class Admin::GenresController < ApplicationController
       redirect_to admin_genres_path, notice: "ジャンル名を更新しました"
     else
       flash[:alert] = "ジャンル名を入力してください"
+      @genre = Genre.find(params[:id])
       render :edit
     end
   end

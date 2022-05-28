@@ -1,2 +1,11 @@
-<h1>Public::Employees#edit</h1>
-<p>Find me in app/views/public/employees/edit.html.erb</p>
+<%= form_with model: @employee, url: admin_employee_path, method: :patch do |f| %>
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :telephone_number, "電話番号" %>
+  <%= f.text_field :telephone_number %><br>
+
+  <%= f.submit %>
+
+<% end %>
+<%= link_to "削除する", admin_employee_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"}  %>

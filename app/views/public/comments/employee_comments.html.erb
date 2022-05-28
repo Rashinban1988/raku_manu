@@ -1,0 +1,14 @@
+<h1>Public::Employees#edit</h1>
+<p>Find me in app/views/public/employees/edit.html.erb</p>
+
+<%= @employee.id %>
+<%= @employee.name %>
+<%= @employee.telephone_number %>
+<%= @employee.is_deleted %>
+
+<% @comments.each do|comment| %>
+  <%= comment.created_at.strftime("%Y年%m月%d日") %>
+  <%= comment.manual.name %>
+  <%= comment.comment %>
+  <%= comment.is_desolved %>
+<% end %>
