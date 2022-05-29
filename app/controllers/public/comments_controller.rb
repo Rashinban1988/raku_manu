@@ -7,13 +7,11 @@ class Public::CommentsController < ApplicationController
   end
 
   def employee_comments_show
-    @employee = Employee.find(params[:id])
-    p "----------------------------------------------------------------------------------"
-    p @employee
     @comment = Comment.find(params[:id])
     @return_comment = @comment.return_comments.new
     @return_comments = @comment.return_comments.all
-    @comments = @employee.comments.all
+    @employee = @comment.employee
+    @manual = @comment.manual
   end
 
   def employee_manual_comment
