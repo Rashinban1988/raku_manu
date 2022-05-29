@@ -28,7 +28,7 @@
 <%= form_with model: @comment, url: public_manuals_path, method: :post do |f| %>
   <%= f.hidden_field :manual_id %>
 
-  <%= f.label :comment, "コメント" %>
+  <%= f.label :comment, "質問内容" %>
   <%= f.text_field :comment %><br>
   <%= f.submit %>
 <% end %>
@@ -36,6 +36,6 @@
 <p>質問：<%= @comments.count %>件</p>
 <% @comments.each do |comment| %>
   <%= comment.comment %>
-  <%= link_to "返信を表示", public_return_comments_path %><br>
+  <%= link_to "返信を表示", public_show_comments_employee_path(comment.id) %><br>
 <% end %>
 

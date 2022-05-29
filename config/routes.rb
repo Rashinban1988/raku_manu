@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
     get "manual/:id/comment" => "comments#manual_comment", as: "comment_manual"
     get "employee/:id/comments" => "comments#employee_comments", as: "comments_employee"
+    get "employee/:id/comments/show" => "comments#employee_comments_show", as: "show_comments_employee"
     patch "comments/is_completed" => "comments#is_completed", as: "is_completed_comments"
     get "learnings/congraturation" => "learnings#congratulation", as: "congratulation_learnings"
     patch "learnings/is_learned" => "learnings#is_rearned", as: "is_learned_learnings"

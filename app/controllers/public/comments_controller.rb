@@ -2,6 +2,17 @@ class Public::CommentsController < ApplicationController
 
   def employee_comments
     @employee = Employee.find(params[:id])
+    @return_comments = ReturnComment.all
+    @comments = @employee.comments.all
+  end
+
+  def employee_comments_show
+    @employee = Employee.find(params[:id])
+    p "----------------------------------------------------------------------------------"
+    p @employee
+    @comment = Comment.find(params[:id])
+    @return_comment = @comment.return_comments.new
+    @return_comments = @comment.return_comments.all
     @comments = @employee.comments.all
   end
 
@@ -28,7 +39,11 @@ class Public::CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:employee_id, :manual_id, :comment, :is_desolved)
+    params.require(:comment).permit(:employee_id, :manual_id, :comment, :is_desolved )
+  end
+
+  def return_comment_params
+    params.require(:return_comment).permit(:comment_id, :return_comment )
   end
 
 end
