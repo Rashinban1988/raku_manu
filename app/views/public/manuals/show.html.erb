@@ -1,15 +1,4 @@
-<% if @comment.errors.any? %>
-<% if @comment.errors.count < 2 %>
-  <h3><%= @comment.errors.count %> error prohibited this obj from being saved:</h3>
-<% else %>
-  <h3><%= @comment.errors.count %> errors prohibited this obj from being saved:</h3>
-<% end %>
-  <ul>
-    <% @comment.errors.full_messages.each do |comment| %>
-      <li><%= comment %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/error_messages', resource: @comment %>
 
 <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
 <%= @manual.genre.name %>
@@ -35,6 +24,9 @@
 
 <p>質問：<%= @comments.count %>件</p>
 <% @comments.each do |comment| %>
+  <%= comment.employee.name %>
+  <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+  <%= link_to "コメント編集", public_comment_path(comment.id) %><br>
   <%= comment.comment %>
   <%= link_to "返信を表示", public_show_comments_employee_path(comment.id) %><br>
 <% end %>

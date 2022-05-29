@@ -1,14 +1,54 @@
-<h1>Public::Employees#edit</h1>
-<p>Find me in app/views/public/employees/edit.html.erb</p>
+<%= @employee.name %>の
+「<%= @manual.task_name %>」への質問<br>
 
-<%= @employee.id %><br>
-<%= @employee.name %><br>
-<%= @employee.telephone_number %><br>
-<%= @employee.is_deleted %><br>
+<%= @employee.name %>
+<%= @comment.created_at.strftime("%Y年%m月%d日") %><br>
+<%= @comment.comment %><br>
 
-<% @comments.each do|comment| %>
-  <%= comment.created_at.strftime("%Y年%m月%d日") %><br>
-  <%= comment.manual.task_name %><br>
-  <%= comment.comment %><br>
-  <%= comment.is_desolved %><br>
+<% @return_comments.each do |return_comment| %>
+  <%= return_comment.employee.name %>
+  <%= return_comment.created_at.strftime("%Y年%m月%d日") %><br>
+  <%= return_comment.return_comment %><br>
 <% end %>
+
+<!--<% form_with model: @comment, url: public_comment_path do |f| %>-->
+<!--  <%= f.submit %><br>-->
+<!--<% end %>-->
+
+<%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
+  <%= f.hidden_field :manual_id %>
+  <%= f.hidden_field :comment %>
+  <% if @comment.is_desolved == false %>
+    <%= f.hidden_field :is_desolved => false %>
+    <button class="button is-success is-outlined is-small ">
+      <span>
+        <% f.submit %>
+      </span>
+      <span class="icon">
+        <i class="fas fa-check"></i>
+      </span>
+      <span>解決</span>
+    </button>
+  <% else %>
+    <%= f.hidden_field :is_desolved => true %>
+    <button class="button is-success is-small ">
+      <span>
+        <% f.submit %>
+      </span>
+      <span class="icon">
+        <i class="fas fa-check"></i>
+      </span>
+      <span>解決済み</span>
+    </button>
+  <% end %>
+<% end %>
+
+<%= form_with model: @return_comment, url: public_create_return_comments_path do |f| %>
+  <%= f.hidden_field :comment_id %>
+  <%= f.hidden_field :employee_id %>
+
+  <%= f.label :return_comment, "質問への返信" %><br>
+  <%= f.text_field :return_comment %><br>
+  <%= f.submit "返信する" %>
+<% end %>
+

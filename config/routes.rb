@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get "top" => "homes#top", as: "top"
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :employees, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:index, :show]
+    resources :comments, only: [:index, :show, :update]
     resources :learnings, only: [:index]
     resources :manuals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
@@ -45,7 +45,9 @@ Rails.application.routes.draw do
     get "manual/:id/comment" => "comments#manual_comment", as: "comment_manual"
     get "employee/:id/comments" => "comments#employee_comments", as: "comments_employee"
     get "employee/:id/comments/show" => "comments#employee_comments_show", as: "show_comments_employee"
+    patch "comments/:id/is_desolved" => "comments#is_desolved", as: "is_desolved_comments"
     patch "comments/is_completed" => "comments#is_completed", as: "is_completed_comments"
+    post " comments/return_comments_create" => "comments#return_comments_create", as: "create_return_comments"
     get "learnings/congraturation" => "learnings#congratulation", as: "congratulation_learnings"
     patch "learnings/is_learned" => "learnings#is_rearned", as: "is_learned_learnings"
   end

@@ -7,7 +7,7 @@ class Public::ManualsController < ApplicationController
     @manual = Manual.find(params[:id])
     @manuals = Manual.all
     @comment = @manual.comments.new
-    @comments = Comment.all
+    @comments = @manual.comments.all
   end
 
   def create

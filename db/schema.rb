@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
@@ -82,14 +83,6 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "leanings", force: :cascade do |t|
-    t.integer "employee_id"
-    t.integer "manual_id"
-    t.boolean "is_learned", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "learnings", force: :cascade do |t|
     t.integer "employee_id"
     t.integer "manual_id"
@@ -109,6 +102,8 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
 
   create_table "return_comments", force: :cascade do |t|
     t.integer "comment_id"
+    t.integer "employee_id"
+    t.integer "admin_id"
     t.string "return_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

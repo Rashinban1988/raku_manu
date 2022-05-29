@@ -6,6 +6,7 @@ class Employee < ApplicationRecord
 
   has_many :learnings, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :return_comments, dependent: :destroy
 
   def self.guest
     Employee.find_or_create_by(email: "guest@example.com") do |employee|

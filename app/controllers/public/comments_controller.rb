@@ -1,5 +1,20 @@
 class Public::CommentsController < ApplicationController
 
+  def show
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to public_manual_path(@comment.manual), notice: "質問内容を編集しました"
+    else
+      @comment = Comment.find(params[:id])
+      flash[:alert] = "編集に失敗しました"
+      render :show
+    end
+  end
+
   def employee_comments
     @employee = Employee.find(params[:id])
     @return_comments = ReturnComment.all
@@ -34,6 +49,43 @@ class Public::CommentsController < ApplicationController
     end
   end
 
+  #解決、未解決の切り替え
+  def is_desolved
+    @comment = Comment.find(params[:id])
+    if @comment.is_desolved == true
+      @comment.is_desolved = false
+    else
+      @comment.is_desolved = true
+    end
+    if @comment.update(comment_params)
+      redirect_to public_show_comments_employee_path
+    else
+      @comment = Comment.find(params[:id])
+      @return_comment = @comment.return_comments.new
+      @return_comments = @comment.return_comments.all
+      @employee = @comment.employee
+      @manual = @comment.manual
+      render :employee_comments_show
+    end
+  end
+
+  def return_comments_create
+    @return_comment = ReturnComment.new(return_comment_params)
+    @return_comment.employee_id = current_employee.id
+    p "----------------------------------------"
+    p @return_comment
+    if @return_comment.save
+      redirect_to public_show_comments_employee_path(@return_comment.comment_id), notice: "質問への返信を投稿しました"
+    else
+      @comment = Comment.find(params[:id])
+      @return_comment = @comment.return_comments.new
+      @return_comments = @comment.return_comments.all
+      @employee = @comment.employee
+      @manual = @comment.manual
+      render :employee_comments_show, alert: "質問への返信に失敗しました"
+    end
+  end
+
   private
 
   def comment_params
@@ -41,7 +93,7 @@ class Public::CommentsController < ApplicationController
   end
 
   def return_comment_params
-    params.require(:return_comment).permit(:comment_id, :return_comment )
+    params.require(:return_comment).permit(:comment_id, :employee_id, :return_comment )
   end
 
 end
