@@ -1,6 +1,13 @@
 class Public::ManualsController < ApplicationController
   def index
     @manuals = Manual.all
+    if params[:keyword].present?
+      @genres = Genre.where("name LIKE ? ", "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @keyword = Genre.all
+      @genres = Genre.all
+    end
   end
 
   def show
@@ -27,7 +34,16 @@ class Public::ManualsController < ApplicationController
     end
   end
 
-  private
+  def search
+    if params[:keyword].present?
+      @genres = Genre.where("name LIKE ", "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @keyword = Genre.all
+    end
+  end
+
+    private
 
   def comment_params
     params.require(:comment).permit(:manual_id, :comment, :is_desolved)

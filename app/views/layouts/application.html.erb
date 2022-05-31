@@ -30,6 +30,10 @@
           <%= image_tag "raku_manu.png", :class => "img-logo" %>
         <% end %>
         <%= link_to "●", new_admin_session_path, class: "text-dark"  %>
+        <%= form_with url: search_public_manuals_path, local: true, method: :get do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "検索" %>
+        <% end %>
         <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
           <span></span>
           <span></span>
