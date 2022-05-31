@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
   create_table "return_comments", force: :cascade do |t|
     t.integer "comment_id"
     t.integer "employee_id"
+    t.integer "admin_id"
     t.string "return_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

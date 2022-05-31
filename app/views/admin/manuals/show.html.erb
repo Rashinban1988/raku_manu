@@ -1,14 +1,85 @@
-<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-<%= @manual.genre.name %>
-<%= @manual.task_name %>
-<%= @manual.description %>
-<%= @manual.is_draft %>
-<% if @manual.video.representable? %>
-  <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-<% else %>
-  <!--ダウンロードリンク-->
-  <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-    <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-  <% end %>
-<% end %>
-<%= link_to "編集する", edit_admin_manual_path %>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        「<%= @manual.task_name %>」
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+
+        <div class="field">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+          <% if @manual.video.representable? %>
+            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
+          <% else %>
+            <!--ダウンロードリンク-->
+            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <P>
+            <span>
+              業務名：
+            </span>
+            <span>
+              <%= @manual.genre.name %>
+            </span>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <span>
+              タスク名：
+            </span>
+            <span>
+              <%= @manual.task_name %>
+            </span>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <span>
+              説明文：
+            </span>
+            <span>
+              <%= @manual.description %>
+            </span>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <% if @manual.is_draft == true %>
+              <span class="is-small is-danger">
+                下書き中
+              </span>
+            <% else %>
+              <span class="is-small is-primary">
+                投稿済み
+              </span>
+            <% end %>
+          </P>
+        </div>
+
+        <div>
+          <span>
+            <%= link_to "編集する", edit_admin_manual_path, class: "button is-small is-success" %>
+          </span>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,8 +1,78 @@
-<%= @employee.id %>
-<%= @employee.name %>
-<%= @employee.telephone_number %>
-<%= @employee.is_deleted %>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        <%= @employee.name %>さんの情報
+      </h2>
+    </div>
+  </div>
+</section>
 
-<%= link_to "編集", edit_public_employee_path %>
-<%= link_to "質問内容一覧を見る", public_comments_employee_path %>
-<%= link_to "習得業務一覧を見る", public_learnings_employee_path %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+
+        <div class="field">
+          <P>
+            <span>
+              従業員No.
+            </span>
+            <span>
+              <%= @employee.id %>
+            </span>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <span>
+              氏名：
+            </span>
+            <span>
+              <%= @employee.name %>
+            </span>
+            <%= link_to edit_public_employee_path do %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-edit"></i>
+            </span>
+            <% end %>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <span>
+              電話番号：
+            </span>
+            <span>
+              <%= @employee.telephone_number %>
+            </span>
+          </P>
+        </div>
+
+        <div class="field">
+          <P>
+            <% if @employee.is_deleted == true %>
+              <span class="">
+                退職
+              </span>
+            <% else %>
+              <span class="">
+                在籍中
+              </span>
+            <% end %>
+          </P>
+        </div>
+
+        <div>
+          <span>
+            <%= link_to "質問内容一覧を見る", public_comments_employee_path, class: "button is-small is-success" %>
+            <%= link_to "習得業務一覧を見る", public_learnings_employee_path, class: "button is-small is-success" %>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

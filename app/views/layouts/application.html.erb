@@ -30,10 +30,16 @@
           <%= image_tag "raku_manu.png", :class => "img-logo" %>
         <% end %>
         <%= link_to "●", new_admin_session_path, class: "text-dark"  %>
-        <%= form_with url: search_public_manuals_path, local: true, method: :get do |f| %>
-          <%= f.text_field :keyword %>
-          <%= f.submit "検索" %>
-        <% end %>
+        <!--<%= form_with url: public_manuals_path, local: true, method: :get do |f| %>-->
+        <!--  <%= f.label :キーワード検索 %>-->
+        <!--  <%= f.text_field :keyword %>-->
+        <!--  <%= f.submit "検索" %>-->
+        <!--<% end %>-->
+        <!--<%= form_with url: public_manuals_path, local: true, method: :get do |f| %>-->
+        <!--  <%= f.label :登録ジャンルから検索 %>-->
+        <!--  <%= f.select :keyword, Genre.all.map { |genre| [genre.name, genre.name] } %>-->
+        <!--  <%= f.submit "検索" %>-->
+        <!--<% end %>-->
         <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
           <span></span>
           <span></span>
@@ -46,6 +52,9 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="field is-grouped">
+                <!--<p class="control">-->
+                <!--  <%= link_to 'アバウト', public_about_path, class: 'navbar-item text-dark' %>-->
+                <!--</p>-->
                 <p class="control">
                   <%= link_to 'マイページ', public_employee_path(current_employee.id), class: 'navbar-item' %>
                 </p>
@@ -92,6 +101,9 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="field is-grouped">
+                <!--<p class="control">-->
+                <!--  <%= link_to 'アバウト', public_about_path, class: 'navbar-item text-dark' %>-->
+                <!--</p>-->
                 <p class="control">
                   <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark' %>
                 </p>

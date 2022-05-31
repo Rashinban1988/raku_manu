@@ -9,54 +9,66 @@
 </section>
 <%= render 'layouts/error_messages', resource: @comment %>
 
-<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-<%= @manual.genre.name %>
-<%= @manual.task_name %>
-<%= @manual.description %>
-<%= @manual.is_draft %>
-<% if @manual.video.representable? %>
-  <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-<% else %>
-  <!--ダウンロードリンク-->
-  <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-    <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-  <% end %>
-<% end %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-<%= form_with model: @comment, url: public_manuals_path, method: :post do |f| %>
-  <%= f.hidden_field :manual_id %>
+        <div class="field">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+        </div>
+        
+        <%= @manual.genre.name %>
+        <%= @manual.task_name %>
+        <%= @manual.description %>
+        <%= @manual.is_draft %>
+        <% if @manual.video.representable? %>
+          <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
+        <% else %>
+          <!--ダウンロードリンク-->
+          <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+            <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
+          <% end %>
+        <% end %>
 
-  <%= f.label :comment, "質問内容" %>
-  <%= f.text_field :comment %><br>
-  <%= f.submit %>
-<% end %>
+        <%= form_with model: @comment, url: public_manuals_path, method: :post do |f| %>
+          <%= f.hidden_field :manual_id %>
 
-<p>質問：<%= @comments.count %>件</p>
-<p>習得人数：
-<%= link_to public_is_learned_manual_learnings_path do %>
-  <span class="is-underlined">
-    <%= @learnings.count %>人
-  </span>
-<% end %>
-</p>
+          <%= f.label :comment, "質問内容" %>
+          <%= f.text_field :comment %><br>
+          <%= f.submit %>
+        <% end %>
 
-
-<% if @manual.learned?(current_employee) %>
-  <%= link_to public_manual_learnings_path(@manual.id), method: :delete do %>
-    <span class="button is-small is-primary">習得済み！</span>
-  <% end %>
-<% else %>
-  <%= link_to public_manual_learnings_path(@manual.id), method: :post do %>
-    <span class="button is-small is-primary is-outlined">習得した！</span>
-  <% end %>
-<% end %><br>
+        <p>質問：<%= @comments.count %>件</p>
+        <p>習得人数：
+        <%= link_to public_is_learned_manual_learnings_path do %>
+          <span class="is-underlined">
+            <%= @learnings.count %>人
+          </span>
+        <% end %>
+        </p>
 
 
-<% @comments.each do |comment| %>
-  <%= comment.employee.name %>
-  <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
-  <%= link_to "コメント編集", public_comment_path(comment.id) %><br>
-  <%= comment.comment %>
-  <%= link_to "質問に返信する", public_show_comments_employee_path(comment.id) %><br>
-<% end %>
+        <% if @manual.learned?(current_employee) %>
+          <%= link_to public_manual_learnings_path(@manual.id), method: :delete do %>
+            <span class="button is-small is-primary">習得済み！</span>
+          <% end %>
+        <% else %>
+          <%= link_to public_manual_learnings_path(@manual.id), method: :post do %>
+            <span class="button is-small is-primary is-outlined">習得した！</span>
+          <% end %>
+        <% end %><br>
 
+
+        <% @comments.each do |comment| %>
+          <%= comment.employee.name %>
+          <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+          <%= link_to "コメント編集", public_comment_path(comment.id) %><br>
+          <%= comment.comment %>
+          <%= link_to "質問に返信する", public_show_comments_employee_path(comment.id) %><br>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>

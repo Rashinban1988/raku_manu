@@ -68,18 +68,21 @@
           </thead>
           <% @genres.each do |genre| %>
             <% genre.manuals.each do |manual| %>
-            <tbody>
-              <tr>
-                <td><%= manual.id %></td>
-                <td><%= manual.genre.name %></td>
-                <td>
-                  <%= link_to public_manual_path(manual.id) do %>
-                  <%= manual.task_name %>
-                  <% end %>
-                </td>
-                <td><%= manual.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></td>
-              </tr>
-            </tbody>
+              <% if manual.is_draft == false %>
+                <tbody>
+                  <tr>
+                    <td><%= manual.id %></td>
+                    <td><%= manual.genre.name %></td>
+                    <td>
+                      <%= link_to public_manual_path(manual.id) do %>
+                      <%= manual.task_name %>
+                      <% end %>
+                    </td>
+                    <td><%= manual.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></td>
+                  </tr>
+                </tbody>
+              <% else %>
+              <% end %>
             <% end %>
           <% end %>
         </table>

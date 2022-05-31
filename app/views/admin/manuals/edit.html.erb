@@ -1,23 +1,62 @@
-<%= form_with model: @manual, url: admin_manual_path, method: :patch do |f| %>
-  <%= f.label :video %>
-  <%= f.file_field :video %><br>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        マニュアル編集
+      </h2>
+    </div>
+  </div>
+</section>
 
-  <%= f.label :genre, "ジャンル" %>
-  <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %><br>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-  <%= f.label :task_name, "業務名" %>
-  <%= f.text_field :task_name %><br>
+        <%= form_with model: @manual, url: admin_manual_path, method: :patch do |f| %>
 
-  <%= f.label :description, "説明文" %>
-  <%= f.text_field :description %><br>
+          <div class="field">
+            <%= f.label :動画投稿, class: "label" %>
+            <%= f.file_field :video %>
+          </div>
 
-  <%= f.label "下書き" %>
-  <%= f.radio_button :is_draft, "true" %>
-  <%= f.label :is_draft, "下書き" %>
-  <%= f.radio_button :is_draft, "false" %>
-  <%= f.label :is_draft, "完了" %><br>
+          <div class="field">
+            <%= f.label :業務名, class: "label" %>
+            <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %>
+          </div>
 
-  <%= f.submit %>
+          <div class="field">
+            <%= f.label :タスク名, class: "label" %>
+            <p>
+              <%= f.text_field :task_name, autofocus: true, autocomplete: "task_name", :placeholder => "例:　レジ精算の操作方法　|　日報の書き方", class: "input" %>
+            </p>
+          </div>
 
-<% end %>
-<%= link_to "削除する", admin_manual_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"}  %>
+          <div class="field">
+            <%= f.label :説明文, class: "label" %>
+            <p>
+              <%= f.text_area :description, autofocus: true, autocomplete: "description", :placeholder => "例:　レジ精算の時に出てくるレシートは捨てないでください　｜　日報を書いたら間違いがないかチェックをすること", class: "textarea", rows:"3" %>
+            </p>
+          </div>
+
+          <div class="field">
+            <%= f.radio_button :is_draft, "true" %>
+            <%= f.label :is_draft, "下書き" %>
+            <%= f.radio_button :is_draft, "false" %>
+            <%= f.label :is_draft, "完了" %><br>
+          </div>
+
+          <div class="action">
+            <span>
+              <%= f.submit "更新", class: "button is-small is-success" %>
+            </span>
+            <span>
+              <%= link_to "削除する", admin_manual_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"} , class: "button is-small is-danger" %>
+            </span>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

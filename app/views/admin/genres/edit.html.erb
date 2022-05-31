@@ -2,7 +2,7 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">
-        ジャンル編集
+        業務名編集
       </h2>
     </div>
   </div>
@@ -15,9 +15,9 @@
 
         <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
           <div class="field">
-            <%= f.label :name, "ジャンル名を変更:", class: "label" %>
+            <%= f.label :name, "業務名を変更:", class: "label" %>
             <p class="control has-icons-left">
-              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "ジャンル名", class: "input" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "例:　レジ精算", class: "input" %>
               <span class="icon is-small is-left">
                 <i class="fa fa-edit"></i>
               </span>

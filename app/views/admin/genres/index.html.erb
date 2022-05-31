@@ -2,7 +2,7 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">
-        ジャンル管理
+        業務名一覧
       </h2>
     </div>
   </div>
@@ -15,9 +15,9 @@
 
         <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
           <div class="field">
-            <%= f.label :name, "ジャンルを追加:", class: "label" %>
+            <%= f.label :name, "業務を追加:", class: "label" %>
             <p class="control has-icons-left">
-              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "ジャンル名", class: "input" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "例:　レジ精算", class: "input" %>
               <span class="icon is-small is-left">
                 <i class="fa fa-edit"></i>
               </span>

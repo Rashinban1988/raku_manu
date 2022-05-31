@@ -1,9 +1,4 @@
 class Public::LearningsController < ApplicationController
-  def show
-  end
-
-  def congratulation
-  end
 
   def employee_index
     @employee = Employee.find(params[:id])
@@ -22,12 +17,13 @@ class Public::LearningsController < ApplicationController
     redirect_to public_manual_path(params[:manual_id])
   end
 
+# 　習得スタッフ一覧用
   def manual_is_learned
     @manual = Manual.find(params[:id])
     @learnings = @manual.learnings.all
   end
 
-  #習得、未収得の切り替え
+  # 習得、未収得の切り替え
   def is_learned
     @learning = Learning.find(params[:id])
     if @learning.is_learned == true
@@ -46,10 +42,6 @@ class Public::LearningsController < ApplicationController
       flash[:alert] = "習得切替に失敗しました"
       render :show
     end
-  end
-
-
-  def update
   end
 
   private
