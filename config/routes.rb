@@ -47,6 +47,9 @@ Rails.application.routes.draw do
     end
     resources :manuals do
       resource :learnings, only: [:create, :destroy, :index]
+      collection do
+        get "search"
+      end
     end
     resources :manuals, only: [:index, :show, :create]
     resources :return_comments, only: [:index]
