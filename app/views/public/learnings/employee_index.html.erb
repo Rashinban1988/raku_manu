@@ -9,6 +9,13 @@
   </div>
 </section>
 
+<%= @employee.created_at.strftime("%Y/%m/%d") %><br>
+<p>業務取得率
+  <span>
+    <%= (@employee.learnings.count.to_f/Manual.all.count.to_f*100).to_i %>%
+  </span>
+</p>
+
 <% @manual_learnings.each do |learning| %>
   <%= learning.manual_id %>
   <%= learning.manual.genre.name %>

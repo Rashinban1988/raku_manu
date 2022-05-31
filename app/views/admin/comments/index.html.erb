@@ -14,5 +14,6 @@
   <%= link_to admin_comment_path(comment.id) do %>
     <%= comment.comment %>
   <% end %>
-  <%= comment.is_desolved %><br>
+  <%= comment.is_desolved %>
+  <%= link_to "削除する", admin_comment_path(comment.id), method: :delete, data: {confirm: "本当に削除してよろしいですか？"} %><br>
 <% end %>

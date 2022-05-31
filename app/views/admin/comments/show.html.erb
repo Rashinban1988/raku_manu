@@ -8,7 +8,7 @@
   </div>
 </section>
 
-<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %><br>
 <%= @employee.name %>
 <%= @comment.created_at.strftime("%Y年%m月%d日") %><br>
 <%= @comment.comment %><br>
@@ -16,45 +16,21 @@
 <% @return_comments.each do |return_comment| %>
   <%= return_comment.employee.name %>
   <%= return_comment.created_at.strftime("%Y年%m月%d日") %><br>
-  <%= return_comment.return_comment %><br>
+  <%= return_comment.return_comment %><%= link_to "削除する", admin_return_comment_path(return_comment.id),method: :delete, data: {confirm: "本当に削除していいですか？"} %><br>
 <% end %>
 
-<!--<% form_with model: @comment, url: public_comment_path do |f| %>-->
-<!--  <%= f.submit %><br>-->
-<!--<% end %>-->
-
-<%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
-  <%= f.hidden_field :manual_id %>
-  <%= f.hidden_field :comment %>
-  <% if @comment.is_desolved == false %>
-    <%= f.hidden_field :is_desolved => false %>
-    <button class="button is-success is-outlined is-small ">
-      <span>
-        <% f.submit %>
-      </span>
-      <span class="icon">
-        <i class="fas fa-check"></i>
-      </span>
-      <span>解決</span>
-    </button>
-  <% else %>
-    <%= f.hidden_field :is_desolved => true %>
-    <button class="button is-success is-small ">
-      <span>
-        <% f.submit %>
-      </span>
-      <span class="icon">
-        <i class="fas fa-check"></i>
-      </span>
-      <span>解決済み</span>
-    </button>
-  <% end %>
+<% if @comment.is_desolved == false %>
+  <button class="button is-danger is-small ">
+    <span class="icon">
+      <i class="fas fa-question"></i>
+    </span>
+    <span>未解決</span>
+  </button>
+<% else %>
+  <button class="button is-success is-small ">
+    <span class="icon">
+      <i class="fas fa-check"></i>
+    </span>
+    <span>解決済み</span>
+  </button>
 <% end %>
-
-<%= form_with model: @return_comment, url: admin_return_comments_path, method: :post do |f| %>
-  <%= f.hidden_field :comment_id %>
-  <%= f.label :return_comment, "質問への返信" %><br>
-  <%= f.text_field :return_comment %><br>
-  <%= f.submit "返信する" %>
-<% end %>
-

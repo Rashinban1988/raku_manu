@@ -1,26 +1,22 @@
 class Admin::ReturnCommentsController < ApplicationController
-
-  def create
-    @return_comment = ReturnComment.new(return_comment_params)
-    @return_comment.admin_id = current_admin.id
-    p "----------------------------------------------------------"
-    p @return_comment
-    if @return_comment.save
-      redirect_to admin_comment_path(@return_comment.comment_id), notice: "質問への返信を投稿しました"
-    else
-      @comment = Comment.find(params[:id])
-      @return_comment = @comment.return_comments.new
-      @return_comments = @comment.return_comments.all
-      @employee = @comment.employee
-      @manual = @comment.manual
-      render :comments/show, alert: "質問への返信に失敗しました"
-    end
+  def index
+    @comment = Comment.find(params[:id])
+    @return_comments = @comment.return_comments.all
+    @employee = @comment.employee.id
+    @manual = @comment.manual.id
   end
 
-  private
-
-  def return_comment_params
-    params.require(:return_comment).permit(:admin_id, :comment_id, :return_comment )
+  def destroy
+    @return_comment = ReturnComment.find(params[:id])
+    @comment = @return_comment.comment_id
+    if @return_comment.destroy
+      redirect_to admin_comment_path, notice: "コメントを削除しました"
+    else
+      @comment = Comment.find(params[:id])
+      @return_comments = @comment.return_comments.all
+      flash[:alert] = "コメントの削除に失敗しました"
+      render :index
+    end
   end
 
 end

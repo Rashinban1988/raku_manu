@@ -22,4 +22,16 @@ class Admin::CommentsController < ApplicationController
     @return_comment = ReturnComment.new
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.destroy
+      redirect_to admin_comments_path, notice: "コメントを削除しました"
+    else
+      @comment = Comment.find(params[:id])
+      @return_comments = @comment.return_comments.all
+      flash[:alert] = "コメントの削除に失敗しました"
+      render :index
+    end
+  end
+
 end

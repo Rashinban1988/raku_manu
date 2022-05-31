@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     get "top" => "homes#top", as: "top"
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :employees, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:index, :show, :update]
-    resources :return_comments, only: [:create]
+    resources :comments, only: [:index, :show, :update, :destroy]
+    resources :return_comments, only: [:index, :destroy]
     resources :learnings, only: [:index]
     resources :manuals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
