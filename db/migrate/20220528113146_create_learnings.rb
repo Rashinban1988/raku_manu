@@ -2,9 +2,9 @@ class CreateLearnings < ActiveRecord::Migration[6.1]
   def change
     create_table :learnings do |t|
 
-      t.integer :employee_id
-      t.integer :manual_id
-      t.integer :is_learned,    default: false
+      t.references :employee, null: false, foreign_key: true
+      t.references :manual, null:false, foreign_key: true
+      t.boolean :is_learned,    default: true
       t.timestamps
     end
   end

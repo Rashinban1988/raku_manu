@@ -1,6 +1,14 @@
 class Admin::CommentsController < ApplicationController
   def index
-    @employee = Employee.all
+    @comments = Comment.all
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
+    @return_comment = @comment.return_comments.new
+    @return_comments = @comment.return_comments.all
+    @employee = @comment.employee
+    @manual = @comment.manual
   end
 
   def employee_comments

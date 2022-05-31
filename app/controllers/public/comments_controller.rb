@@ -1,5 +1,9 @@
 class Public::CommentsController < ApplicationController
 
+  def index
+    @comments = Comment.all
+  end
+
   def show
     @comment = Comment.find(params[:id])
   end
@@ -40,12 +44,8 @@ class Public::CommentsController < ApplicationController
     if @comment.save
       redirect_to public_manual_path, notice: "質問を投稿しました"
     else
-      # @manual = Manual.find(params[:id])
-      # @comment = Comment.new
-      # @comments = Comment.all
       flash[:alert] = "質問の投稿に失敗しました"
       render :show
-      # redirect_to public_manual_path, alert: "質問の投稿に失敗しました"
     end
   end
 
@@ -72,8 +72,6 @@ class Public::CommentsController < ApplicationController
   def return_comments_create
     @return_comment = ReturnComment.new(return_comment_params)
     @return_comment.employee_id = current_employee.id
-    p "----------------------------------------"
-    p @return_comment
     if @return_comment.save
       redirect_to public_show_comments_employee_path(@return_comment.comment_id), notice: "質問への返信を投稿しました"
     else

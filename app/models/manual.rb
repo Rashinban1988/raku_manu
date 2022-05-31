@@ -22,4 +22,8 @@ class Manual < ApplicationRecord
     end
   end
 
+  def learned?(employee)
+    learnings.where(employee_id: employee.id).exists?
+  end
+
 end

@@ -1,0 +1,17 @@
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        <span><%= @employee.name %></span>さんの習得業務一覧
+      </h2>
+
+    </div>
+  </div>
+</section>
+
+<% @manual_learnings.each do |learning| %>
+  <%= learning.manual_id %>
+  <%= learning.manual.genre.name %>
+  <%= learning.manual.task_name %>
+  <%= learning.created_at.strftime("%Y/%m/%d") %><br>
+<% end %>

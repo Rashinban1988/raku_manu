@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Employee::RegistrationsController < Devise::RegistrationsController
-  beforore_action :check_guest, only: %i[update destroy]
+  before_action :check_guest, only: %i[update destroy]
 
   def check_guest
     if resource.email == "guest@example.com"

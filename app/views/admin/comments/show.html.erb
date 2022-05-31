@@ -51,10 +51,8 @@
   <% end %>
 <% end %>
 
-<%= form_with model: @return_comment, url: public_create_return_comments_path do |f| %>
+<%= form_with model: @return_comment, url: admin_return_comments_path, method: :post do |f| %>
   <%= f.hidden_field :comment_id %>
-  <%= f.hidden_field :employee_id %>
-
   <%= f.label :return_comment, "質問への返信" %><br>
   <%= f.text_field :return_comment %><br>
   <%= f.submit "返信する" %>

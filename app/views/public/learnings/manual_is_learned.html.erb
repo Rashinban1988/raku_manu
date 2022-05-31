@@ -1,0 +1,29 @@
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        <span>「<%= @manual.task_name %>」</span>習得スタッフ一覧
+      </h2>
+
+    </div>
+  </div>
+</section>
+
+<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+<%= @manual.genre.name %>
+<%= @manual.task_name %>
+<%= @manual.description %>
+<% if @manual.video.representable? %>
+  <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
+<% else %>
+  <!--ダウンロードリンク-->
+  <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+    <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
+  <% end %>
+<% end %>
+
+<p>習得スタッフ一覧</p>
+<% @learnings.each do |learning| %>
+  <%= learning.employee.name %>
+  <%= link_to "習得業務一覧へ", public_learnings_employee_path(learning.employee_id) %><br>
+<% end %>

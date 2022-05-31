@@ -4,7 +4,6 @@ class CreateReturnComments < ActiveRecord::Migration[6.1]
 
       t.integer :comment_id
       t.integer :employee_id
-      t.integer :admin_id
       t.string :return_comment
       t.timestamps
     end

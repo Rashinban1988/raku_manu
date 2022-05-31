@@ -11,7 +11,7 @@
 <% @comments.each do |comment| %>
   <%= comment.created_at %>
   <%= comment.manual.task_name %>
-  <%= link_to admin_comment_path(comment.id) do %>
+  <%= link_to public_show_comments_employee_path(comment.id) do %>
     <%= comment.comment %>
   <% end %>
   <%= comment.is_desolved %><br>

@@ -8,6 +8,9 @@ class Employee < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :return_comments, dependent: :destroy
 
+  validates :name, presence: true
+  validates :telephone_number, presence: true
+
   def self.guest
     Employee.find_or_create_by(email: "guest@example.com") do |employee|
       employee.password = SecureRandom.urlsafe_base64

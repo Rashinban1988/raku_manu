@@ -49,6 +49,9 @@
                   <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark' %>
                 </p>
                 <p class="control">
+                  <%= link_to "質問一覧", public_comments_path, class: "navbar-item text-dark" %>
+                </p>
+                <p class="control">
                   <%= link_to "ログアウト", destroy_employee_session_path, method: :delete, class: "navbar-item text-dark" %>
                 </p>
               </div>
@@ -68,9 +71,6 @@
                 </p>
                 <p class="control">
                   <%= link_to "従業員一覧", admin_employees_path, class: "navbar-item text-dark" %>
-                </p>
-                <p class="control">
-                  <%= link_to "質問一覧", admin_comments_path, class: "navbar-item text-dark" %>
                 </p>
                 <p class="control">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "navbar-item text-dark" %>

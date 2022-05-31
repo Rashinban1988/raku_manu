@@ -1,3 +1,12 @@
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        マニュアル：　<%= @manual.task_name %>
+      </h2>
+    </div>
+  </div>
+</section>
 <%= render 'layouts/error_messages', resource: @comment %>
 
 <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
@@ -23,11 +32,31 @@
 <% end %>
 
 <p>質問：<%= @comments.count %>件</p>
+<p>習得人数：
+<%= link_to public_is_learned_manual_learnings_path do %>
+  <span class="is-underlined">
+    <%= @learnings.count %>人
+  </span>
+<% end %>
+</p>
+
+
+<% if @manual.learned?(current_employee) %>
+  <%= link_to public_manual_learnings_path(@manual.id), method: :delete do %>
+    <span class="button is-small is-primary">習得済み！</span>
+  <% end %>
+<% else %>
+  <%= link_to public_manual_learnings_path(@manual.id), method: :post do %>
+    <span class="button is-small is-primary is-outlined">習得した！</span>
+  <% end %>
+<% end %><br>
+
+
 <% @comments.each do |comment| %>
   <%= comment.employee.name %>
   <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
   <%= link_to "コメント編集", public_comment_path(comment.id) %><br>
   <%= comment.comment %>
-  <%= link_to "返信を表示", public_show_comments_employee_path(comment.id) %><br>
+  <%= link_to "質問に返信する", public_show_comments_employee_path(comment.id) %><br>
 <% end %>
 

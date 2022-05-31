@@ -84,11 +84,13 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
   end
 
   create_table "learnings", force: :cascade do |t|
-    t.integer "employee_id"
-    t.integer "manual_id"
-    t.integer "is_learned", default: 0
+    t.integer "employee_id", null: false
+    t.integer "manual_id", null: false
+    t.boolean "is_learned", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_learnings_on_employee_id"
+    t.index ["manual_id"], name: "index_learnings_on_manual_id"
   end
 
   create_table "manuals", force: :cascade do |t|
@@ -103,7 +105,6 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
   create_table "return_comments", force: :cascade do |t|
     t.integer "comment_id"
     t.integer "employee_id"
-    t.integer "admin_id"
     t.string "return_comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -111,4 +112,6 @@ ActiveRecord::Schema.define(version: 2022_05_28_113146) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "learnings", "employees"
+  add_foreign_key "learnings", "manuals"
 end
