@@ -13,7 +13,7 @@ class Admin::ManualsController < ApplicationController
     if @manual.save
       redirect_to admin_manuals_path, notice: "マニュアルを投稿しました"
     else
-      @manual = Manual.new
+      @genres = Genre.all
       flash[:alert] = "マニュアルの投稿に失敗しました"
       render :new
     end

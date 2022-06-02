@@ -13,17 +13,7 @@
     <div class="columns is-centered">
       <div class="column is-6">
 
-        <div class="field">
-          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-          <% if @manual.video.representable? %>
-            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-          <% else %>
-            <!--ダウンロードリンク-->
-            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-            <% end %>
-          <% end %>
-        </div>
+
 
         <div class="field">
           <P>

@@ -8,20 +8,29 @@
   </div>
 </section>
 
-<p>従業員登録日：
-  <span>
-    <%= @employee.created_at.strftime("%Y/%m/%d") %><br>
-  </span>
-</p>
-<p>業務取得率：
-  <span>
-    <%= (@employee.learnings.count.to_f/Manual.all.count.to_f*100).to_i %>%
-  </span>
-</p>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-<% @manual_learnings.each do |learning| %>
-  <%= learning.manual_id %>
-  <%= learning.manual.genre.name %>
-  <%= learning.manual.task_name %>
-  <%= learning.created_at.strftime("%Y/%m/%d") %><br>
-<% end %>
+        <p>従業員登録日：
+          <span>
+            <%= @employee.created_at.strftime("%Y/%m/%d") %><br>
+          </span>
+        </p>
+        <p>業務取得率：
+          <span>
+            <%= (@employee.learnings.count.to_f/Manual.all.count.to_f*100).to_i %>%
+          </span>
+        </p>
+
+        <% @manual_learnings.each do |learning| %>
+          <%= learning.manual.genre.name %>
+          <%= learning.manual.task_name %>
+          <%= learning.created_at.strftime("%Y/%m/%d") %><br>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>

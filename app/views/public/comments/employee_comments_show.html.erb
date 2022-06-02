@@ -8,55 +8,85 @@
   </div>
 </section>
 
-<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-<%= @employee.name %>
-<%= @comment.created_at.strftime("%Y年%m月%d日") %><br>
-<%= @comment.comment %><br>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-<% @return_comments.each do |return_comment| %>
-  <%= return_comment.employee.name %>
-  <%= return_comment.created_at.strftime("%Y年%m月%d日") %><br>
-  <%= return_comment.return_comment %><br>
-<% end %>
+        <div class="field">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+          <% if @manual.video.representable? %>
+            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
+          <% else %>
+            <!--ダウンロードリンク-->
+            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
+            <% end %>
+          <% end %>
+        </div>
 
-<!--<% form_with model: @comment, url: public_comment_path do |f| %>-->
-<!--  <%= f.submit %><br>-->
-<!--<% end %>-->
+        <div class="field">
+          <i class="fa fa-user"></i><%= @comment.employee.name %>
+          <span class="has-text-info"><%= @comment.created_at.strftime("%Y/%m/%d/%H:%M") %></span>
+          <%= link_to public_comment_path(@comment.id) do %>
+            <i class="fa fa-edit"></i><br>
+          <% end %>
+          <strong class="ml-3"><%= @comment.comment %></strong><br>
+        </div>
 
-<%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
-  <%= f.hidden_field :manual_id %>
-  <%= f.hidden_field :comment %>
-  <% if @comment.is_desolved == false %>
-    <%= f.hidden_field :is_desolved => false %>
-    <button class="button is-success is-outlined is-small ">
-      <span>
-        <% f.submit %>
-      </span>
-      <span class="icon">
-        <i class="fas fa-check"></i>
-      </span>
-      <span>解決</span>
-    </button>
-  <% else %>
-    <%= f.hidden_field :is_desolved => true %>
-    <button class="button is-success is-small ">
-      <span>
-        <% f.submit %>
-      </span>
-      <span class="icon">
-        <i class="fas fa-check"></i>
-      </span>
-      <span>解決済み</span>
-    </button>
-  <% end %>
-<% end %>
+        <div class="field">
+          <% @return_comments.each do |return_comment| %>
+            <div class="field ml-3">
+              <i class="fa fa-user"></i><%= return_comment.employee.name %>
+              <span class="has-text-info"><%= return_comment.created_at.strftime("%Y年%m月%d日") %></span><br>
+              <strong class="ml-3"><%= return_comment.return_comment %></strong>
+            </div>
+          <% end %>
+        </div>
 
-<%= form_with model: @return_comment, url: public_create_return_comments_path do |f| %>
-  <%= f.hidden_field :comment_id %>
-  <%= f.hidden_field :employee_id %>
+        <%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
+          <%= f.hidden_field :manual_id %>
+          <%= f.hidden_field :comment %>
+          <% if @comment.is_desolved == false %>
+            <%= f.hidden_field :is_desolved => false %>
+            <button class="button is-success is-outlined is-small ">
+              <span>
+                <% f.submit %>
+              </span>
+              <span class="icon">
+                <i class="fas fa-check"></i>
+              </span>
+              <span>解決</span>
+            </button>
+          <% else %>
+            <%= f.hidden_field :is_desolved => true %>
+            <button class="button is-success is-small ">
+              <span>
+                <% f.submit %>
+              </span>
+              <span class="icon">
+                <i class="fas fa-check"></i>
+              </span>
+              <span>解決済み</span>
+            </button>
+          <% end %>
+        <% end %>
 
-  <%= f.label :return_comment, "質問への返信" %><br>
-  <%= f.text_field :return_comment %><br>
-  <%= f.submit "返信する" %>
-<% end %>
+        <div class="field mt-3">
+          <%= form_with model: @return_comment, url: public_create_return_comments_path do |f| %>
+            <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :employee_id %>
+            <div class="field">
+              <%= f.label :return_comment, "質問への返信", class: "label" %>
+              <%= f.text_area :return_comment, autofocus: true, autocomplete: "return_comment", :placeholder => "例:　〇〇はここにあります", class: "input", row: "3" %>
+            </div>
+            <div class="field">
+              <%= f.submit "返信する", class: "button is-success" %>
+            </div>
+          <% end %>
+        </div>
 
+      </div>
+    </div>
+  </div>
+</section>

@@ -14,11 +14,17 @@ class Manual < ApplicationRecord
     validates :video
     validates :genre_id
   end
-  validate :video_size
+  validate :video_size, :video_type
 
   def video_size
-    if video.blob.byte_size > 60.megabytes
-      errors.add(:video, "動画を撮影しなおして下さい←60MB約3分以内")
+    if video.blob.byte_size > 20.megabytes
+      errors.add(:video, "動画を60MG以内で撮影しなおして下さい（約３分以内）")
+    end
+  end
+
+  def video_type
+    if !"video".in?(video.blob.content_type)
+      errors.add(:video, "はmp4またはwebm形式でアップロードしてください")
     end
   end
 

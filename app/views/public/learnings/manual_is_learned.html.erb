@@ -8,21 +8,78 @@
   </div>
 </section>
 
-<%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-<%= @manual.genre.name %>
-<%= @manual.task_name %>
-<%= @manual.description %>
-<% if @manual.video.representable? %>
-  <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-<% else %>
-  <!--ダウンロードリンク-->
-  <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-    <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-  <% end %>
-<% end %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-<p>習得スタッフ一覧</p>
-<% @learnings.each do |learning| %>
-  <%= learning.employee.name %>
-  <%= link_to "習得業務一覧へ", public_learnings_employee_path(learning.employee_id) %><br>
-<% end %>
+        <div class="field">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+          <% if @manual.video.representable? %>
+            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
+          <% else %>
+            <!--ダウンロードリンク-->
+            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <span class ="is-bold">
+            業務名：
+          </span>
+          <%= @manual.genre.name %>
+        </div>
+
+        <div class="field">
+          <span class ="is-bold">
+            タスク名：
+          </span>
+          <%= @manual.task_name %>
+        </div>
+
+        <div class="field">
+          <span class ="is-bold">
+            説明文：
+          </span>
+          <%= @manual.description %>
+        </div>
+
+        <p>習得スタッフ一覧</p>
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>ID</th>
+              <th>氏名</th>
+              <th>在籍</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @learnings.each do |learning| %>
+          <tbody>
+            <tr>
+              <td><%= learning.employee.id %></td>
+              <td>
+                <%= learning.employee.name %>
+              </td>
+              <% if learning.employee.is_deleted == true %>
+              <td class="text-secondary">
+                退職
+              </td>
+              <% else %>
+              <td class="text-success">
+                在籍中
+              </td>
+              <td><%= link_to "習得業務一覧へ", public_learnings_employee_path(learning.employee_id) %></td>
+              <% end %>
+            </tr>
+          </tbody>
+
+          <% end %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>

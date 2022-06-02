@@ -14,15 +14,16 @@
       <div class="column is-6">
 
         <%= form_with model: @manual, url: admin_manuals_path, method: :post do |f| %>
+        <%= render "layouts/error_messages", resource: @manual %>
 
           <div class="field">
-            <%= f.label :動画投稿, class: "label" %>
+            <%= f.label :動画, class: "label" %>
             <%= f.file_field :video %>
           </div>
 
           <div class="field">
             <%= f.label :業務名, class: "label" %>
-            <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %>
+            <%= f.select :genre_id, options_from_collection_for_select(@genres, :id, :name) %>
           </div>
 
           <div class="field">
@@ -43,7 +44,7 @@
             <%= f.radio_button :is_draft, "true" %>
             <%= f.label :is_draft, "下書き" %>
             <%= f.radio_button :is_draft, "false" %>
-            <%= f.label :is_draft, "完了" %><br>
+            <%= f.label :is_draft, "投稿" %><br>
           </div>
 
           <div class="action">
