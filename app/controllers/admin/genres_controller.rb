@@ -24,9 +24,6 @@ class Admin::GenresController < ApplicationController
   def update
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
-      # unless @genre.is_active
-      #   @genre.manuals.update_all(is_active: false)
-      # end
       redirect_to admin_genres_path, notice: "ジャンル名を更新しました"
     else
       flash[:alert] = "ジャンル名を入力してください"
