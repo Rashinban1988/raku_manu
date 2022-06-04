@@ -1,4 +1,6 @@
 class Admin::ManualsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @manuals = Manual.all
   end

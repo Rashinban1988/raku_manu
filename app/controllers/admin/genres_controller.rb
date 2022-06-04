@@ -36,6 +36,10 @@ class Admin::GenresController < ApplicationController
   end
 
   def destroy
+    @genre = Genre.find(params[:id])
+    if @genre.destroy
+      redirect_to admin_genres_path, notice: "削除が完了しました"
+    end
   end
 
   private

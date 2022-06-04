@@ -53,28 +53,30 @@
         <%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
           <%= f.hidden_field :manual_id %>
           <%= f.hidden_field :comment %>
-          <% if @comment.is_desolved == false %>
-            <%= f.hidden_field :is_desolved => false %>
-            <button class="button is-success is-outlined is-small ">
-              <span>
-                <% f.submit %>
-              </span>
-              <span class="icon">
-                <i class="fas fa-check"></i>
-              </span>
-              <span>解決</span>
-            </button>
-          <% else %>
-            <%= f.hidden_field :is_desolved => true %>
-            <button class="button is-success is-small ">
-              <span>
-                <% f.submit %>
-              </span>
-              <span class="icon">
-                <i class="fas fa-check"></i>
-              </span>
-              <span>解決済み</span>
-            </button>
+          <% if @comment.employee_id == current_employee.id %>
+            <% if @comment.is_desolved == false %>
+              <%= f.hidden_field :is_desolved => false %>
+              <button class="button is-success is-outlined is-small ">
+                <span>
+                  <% f.submit %>
+                </span>
+                <span class="icon">
+                  <i class="fas fa-check"></i>
+                </span>
+                <span>解決</span>
+              </button>
+            <% else %>
+              <%= f.hidden_field :is_desolved => true %>
+              <button class="button is-success is-small ">
+                <span>
+                  <% f.submit %>
+                </span>
+                <span class="icon">
+                  <i class="fas fa-check"></i>
+                </span>
+                <span>解決済み</span>
+              </button>
+            <% end %>
           <% end %>
         <% end %>
 

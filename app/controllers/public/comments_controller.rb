@@ -1,4 +1,14 @@
 class Public::CommentsController < ApplicationController
+  before_action :ensure_current_user, {only: [:show, :update, :create, :is_desolved]}
+
+  def ensure_current_user
+    @comment = Comment.find(params[:id])
+    @employee = @comment.employee
+    if current_employee.id != @employee.id
+      flash[:alert]="権限がありません"
+      redirect_to("/")
+    end
+  end
 
   def index
     if params[:keyword].present?

@@ -23,13 +23,10 @@ Rails.application.routes.draw do
     get "top" => "homes#top", as: "top"
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :employees, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:index, :show, :update, :destroy]
     resources :return_comments, only: [:index, :destroy]
     resources :learnings, only: [:index]
     resources :manuals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
-    get "manual/:id/comment" => "comments#manual_comment", as: "comment_manual"
-    get "employee/:id/comments" => "comments#employee_comments", as: "comments_employee"
     post "manuals/is_draft" => "manuals#is_draft", as: "is_draft_manuals"
     patch "manuals/re_draft" => "manuals#re_draft", as: "re_draft_manuals"
   end

@@ -1,4 +1,6 @@
 class Admin::ReturnCommentsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @comment = Comment.find(params[:id])
     @return_comments = @comment.return_comments.all
