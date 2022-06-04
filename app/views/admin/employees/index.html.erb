@@ -34,11 +34,11 @@
               <td><%= employee.telephone_number %></td>
               <% if employee.is_deleted == true %>
               <td class="text-secondary">
-                <%= employee.is_deleted %>
+                退職
               </td>
               <% else %>
               <td class="text-success">
-                <%= employee.is_deleted %>
+                在籍中
               </td>
               <% end %>
             </tr>

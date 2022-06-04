@@ -8,11 +8,68 @@
   </div>
 </section>
 
-<% @comments.each do |comment| %>
-  <%= comment.created_at %>
-  <%= comment.manual.task_name %>
-  <%= link_to public_show_comments_employee_path(comment.id) do %>
-    <%= comment.comment %>
-  <% end %>
-  <%= comment.is_desolved %><br>
-<% end %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+
+        <div class="field">
+          <%= form_with url: public_comments_path, local: true, method: :get do |f| %>
+            <%= f.select :keyword, {"解決": 1, "未解決": 0}, {include_blank: "すべて"}, { class: "form-control"} %>
+            <%= f.submit "検索", class: "button is-small is-success" %>
+          <% end %>
+        </div>
+        <div class="field">
+          <p>
+            <% if @keyword == Comment.all %>
+              <span>すべて</span>
+            <% else %>
+              <% if @keyword == 1 %>
+                解決
+              <% else %>
+                未解決
+              <% end %>
+            <% end %>
+            の質問一覧
+          </p>
+        </div>
+
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>質問日</th>
+              <th>タスク名</th>
+              <th>質問内容</th>
+              <th>解決ステータス</th>
+            </tr>
+          </thead>
+          <% @comments.each do |comment| %>
+          <tbody>
+            <tr>
+              <td><%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+              <td>
+                <%= comment.manual.task_name %>
+              </td>
+              <td>
+                <%= link_to public_show_comments_employee_path(comment.id) do %>
+                  <%= comment.comment %>
+                <% end %>
+              </td>
+              <% if comment.is_desolved == true %>
+                <td class="text-success">
+                  解決
+                </td>
+              <% else %>
+                <td class="text-secondary">
+                  未解決
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</section>

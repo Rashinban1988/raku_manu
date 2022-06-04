@@ -2,6 +2,12 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">
+        <% if @comment.is_desolved == true %>
+          <span class="has-text-danger">
+            解決済み！
+          </span><br>
+        <% else %>
+        <% end %>
         <%= @employee.name %>さんの「<%= @manual.task_name %>」への質問と返信
       </h2>
     </div>
@@ -38,7 +44,7 @@
           <% @return_comments.each do |return_comment| %>
             <div class="field ml-3">
               <i class="fa fa-user"></i><%= return_comment.employee.name %>
-              <span class="has-text-info"><%= return_comment.created_at.strftime("%Y年%m月%d日") %></span><br>
+              <span class="has-text-info"><%= return_comment.created_at.strftime("%Y/%m/%d/%H:%M") %></span><br>
               <strong class="ml-3"><%= return_comment.return_comment %></strong>
             </div>
           <% end %>
@@ -77,7 +83,7 @@
             <%= f.hidden_field :comment_id %>
             <%= f.hidden_field :employee_id %>
             <div class="field">
-              <%= f.label :return_comment, "質問への返信", class: "label" %>
+              <%= f.label :return_comment, "続けて返信する", class: "label" %>
               <%= f.text_area :return_comment, autofocus: true, autocomplete: "return_comment", :placeholder => "例:　〇〇はここにあります", class: "input", row: "3" %>
             </div>
             <div class="field">

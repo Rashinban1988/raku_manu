@@ -1,37 +1,10 @@
 <section class="hero is-warning">
-  <!-- Hero head: will stick at the top -->
   <div class="hero-body">
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <span class ="title">
-            マニュアル一覧
-          </span>
-          <!--<a class="navbar-item">-->
-          <!--  楽ま～にゅ-->
-          <!--</a>-->
-          <span class="navbar-burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <!--<a class="navbar-item is-active">-->
-            <!--  Home-->
-            <!--</a>-->
-            <!--<a class="navbar-item">-->
-            <!--  Examples-->
-            <!--</a>-->
-            <!--<a class="navbar-item">-->
-            <!--  Documentation-->
-            <!--</a>-->
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <div class="container">
+      <h2 class="title">
+        マニュアル一覧
+      </h2>
+    </div>
   </div>
 </section>
 
@@ -68,9 +41,8 @@
         <table class="table">
           <thead class="bg-light">
             <tr>
-              <th>ID</th>
-              <th>ジャンル</th>
-              <th>業務名</th>
+              <th>業務</th>
+              <th>タスク</th>
               <th>更新日</th>
             </tr>
           </thead>
@@ -79,14 +51,13 @@
               <% if manual.is_draft == false %>
                 <tbody>
                   <tr>
-                    <td><%= manual.id %></td>
                     <td><%= manual.genre.name %></td>
                     <td>
                       <%= link_to public_manual_path(manual.id) do %>
                       <%= manual.task_name %>
                       <% end %>
                     </td>
-                    <td><%= manual.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></td>
+                    <td><%= manual.updated_at.strftime("%Y/%m/%d") %></td>
                   </tr>
                 </tbody>
               <% else %>

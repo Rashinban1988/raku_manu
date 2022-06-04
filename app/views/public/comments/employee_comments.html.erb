@@ -1,16 +1,54 @@
-<h1>Public::Employees#edit</h1>
-<p>Find me in app/views/public/employees/edit.html.erb</p>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        <%= @employee.name %>さんの質問一覧
+      </h2>
+    </div>
+  </div>
+</section>
 
-<%= @employee.name %><
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
 
-<%= @employee.id %><br>
-<%= @employee.name %><br>
-<%= @employee.telephone_number %><br>
-<%= @employee.is_deleted %><br>
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>質問日</th>
+              <th>タスク名</th>
+              <th>質問内容</th>
+              <th>解決ステータス</th>
+            </tr>
+          </thead>
+          <% @comments.each do |comment| %>
+          <tbody>
+            <tr>
+              <td><%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+              <td>
+                <%= comment.manual.task_name %>
+              </td>
+              <td>
+                <%= link_to public_show_comments_employee_path(comment.id) do %>
+                  <%= comment.comment %>
+                <% end %>
+              </td>
+              <% if comment.is_desolved == true %>
+                <td class="text-success">
+                  解決
+                </td>
+              <% else %>
+                <td class="text-secondary">
+                  未解決
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
 
-<% @comments.each do|comment| %>
-  <%= comment.created_at.strftime("%Y年%m月%d日") %><br>
-  <%= comment.manual.task_name %><br>
-  <%= comment.comment %><br>
-  <%= comment.is_desolved %><br>
-<% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,9 +1,59 @@
-<h1>Admin::Comments#show</h1>
-<p>Find me in app/views/admin/comments/show.html.erb</p>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">
+        <%= @employee.name %>さんの質問一覧
+      </h2>
+    </div>
+  </div>
+</section>
 
-<% @comments.each do|comment| %>
-  <%= comment.created_at.strftime("%Y年%m月%d日") %>
-  <%= comment.manual.name %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>質問日</th>
+              <th>タスク名</th>
+              <th>質問内容</th>
+              <th>解決ステータス</th>
+            </tr>
+          </thead>
+         <% @comments.each do|comment| %>
+          <tbody>
+            <tr>
+              <td><%= employee.id %></td>
+              <td>
+                <%= comment.created_at.strftime("%Y年%m月%d日") %>
+              </td>
+              <td><%= employee.telephone_number %></td>
+              <% if employee.is_deleted == true %>
+              <td class="text-secondary">
+                退職
+              </td>
+              <% else %>
+              <td class="text-success">
+                在籍中
+              </td>
+              <% end %>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+          <div class="field">
+            <%= comment.created_at.strftime("%Y年%m月%d日") %>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <%= comment.manual.task_name %>
   <%= comment.comment %>
   <%= comment.is_desolved %>
 <% end %>

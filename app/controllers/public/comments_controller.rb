@@ -1,7 +1,13 @@
 class Public::CommentsController < ApplicationController
 
   def index
-    @comments = Comment.all
+    if params[:keyword].present?
+      @comments = Comment.where("is_desolved LIKE ? ", "%#{params[:keyword]}%").order(id: :DESC)
+      @keyword = params[:keyword]
+    else
+      @keyword = Comment.all
+      @comments = Comment.all.order(id: :DESC)
+    end
   end
 
   def show
@@ -22,7 +28,7 @@ class Public::CommentsController < ApplicationController
   def employee_comments
     @employee = Employee.find(params[:id])
     @return_comments = ReturnComment.all
-    @comments = @employee.comments.all
+    @comments = @employee.comments.all.order(id: :DESC)
   end
 
   def employee_comments_show
@@ -81,6 +87,16 @@ class Public::CommentsController < ApplicationController
       @employee = @comment.employee
       @manual = @comment.manual
       render :employee_comments_show, alert: "質問への返信に失敗しました"
+    end
+  end
+
+  # 検索機能
+  def search
+    if params[:keyword].present?
+      @comments = Comment.where("is_desolved LIKE ", "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @keyword = Comment.all
     end
   end
 

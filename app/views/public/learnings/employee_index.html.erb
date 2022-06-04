@@ -24,11 +24,27 @@
           </span>
         </p>
 
-        <% @manual_learnings.each do |learning| %>
-          <%= learning.manual.genre.name %>
-          <%= learning.manual.task_name %>
-          <%= learning.created_at.strftime("%Y/%m/%d") %><br>
-        <% end %>
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th>習得日</th>
+              <th>業務名</th>
+              <th>タスク名</th>
+            </tr>
+          </thead>
+          <% @manual_learnings.each do |learning| %>
+            <tbody>
+              <tr>
+                <td><%= learning.created_at.strftime("%Y/%m/%d") %></td>
+                <td><%= learning.manual.genre.name %></td>
+                <td>
+                  <%= link_to public_manual_path(learning.manual.id) do %>
+                    <%= learning.manual.task_name %>
+                  <% end %>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
 
       </div>
     </div>

@@ -24,102 +24,95 @@
       </div>
     <% end %>
 
-    <nav class="navbar">
-      <div class="nafvbar-brand">
-        <%= link_to root_path do %>
-          <%= image_tag "raku_manu.png", :class => "img-logo" %>
-        <% end %>
-        <%= link_to "●", new_admin_session_path, class: "text-dark"  %>
-        <!--<%= form_with url: public_manuals_path, local: true, method: :get do |f| %>-->
-        <!--  <%= f.label :キーワード検索 %>-->
-        <!--  <%= f.text_field :keyword %>-->
-        <!--  <%= f.submit "検索" %>-->
-        <!--<% end %>-->
-        <!--<%= form_with url: public_manuals_path, local: true, method: :get do |f| %>-->
-        <!--  <%= f.label :登録ジャンルから検索 %>-->
-        <!--  <%= f.select :keyword, Genre.all.map { |genre| [genre.name, genre.name] } %>-->
-        <!--  <%= f.submit "検索" %>-->
-        <!--<% end %>-->
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span></span>
-          <span></span>
-          <span></span>
+    <nav class="navbar", role="navigation", aria-label="main navigation">
+        <div class="nafvbar-brand">
+          <%= link_to root_path do %>
+            <%= image_tag "raku_manu.png", :class => "img-logo" %>
+          <% end %>
+          <%= link_to ".", new_admin_session_path, class: "text-dark"  %>
         </div>
-      </div>
 
-      <% if employee_signed_in? %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <a class="navbar-burger navbar-end", data-target="menu", role="button", aria-label="menu", aria-expanded="false">
+          <span aria-hiddun="true"></span>
+          <span aria-hiddun="true"></span>
+          <span aria-hiddun="true"></span>
+        </a>
+
+        <% if employee_signed_in? %>
+        <div id="menu" class="navbar-menu">
+
           <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <!--<p class="control">-->
-                <!--  <%= link_to 'アバウト', public_about_path, class: 'navbar-item text-dark' %>-->
-                <!--</p>-->
-                <p class="control">
-                  <%= link_to 'マイページ', public_employee_path(current_employee.id), class: 'navbar-item' %>
-                </p>
-                <p class="control">
+            <div class="navbar-item has-dropdown is-hoverable navbar-end">
+              <p class="navbar-link">
+                <%= link_to 'マイページ', public_employee_path(current_employee.id), class: 'navbar-item' %>
+              </p>
+              <div class="navbar-dropdown">
+                <p class="navbar-item">
                   <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark' %>
                 </p>
-                <p class="control">
+                <p class="navbar-item">
                   <%= link_to "質問一覧", public_comments_path, class: "navbar-item text-dark" %>
                 </p>
-                <p class="control">
+                <hr class="navbar-divider">
+                <p class="navbar-item">
                   <%= link_to "ログアウト", destroy_employee_session_path, method: :delete, class: "navbar-item text-dark" %>
                 </p>
               </div>
             </div>
           </div>
         </div>
-      <% elsif admin_signed_in? %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <% elsif admin_signed_in? %>
+        <div id="menu" class="navbar-menu">
           <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to 'ジャンル一覧', admin_genres_path, class: 'navbar-item' %>
-                </p>
-                <p class="control">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <p class="navbar-link">
+                <%= link_to '業務一覧', admin_genres_path, class: 'navbar-item' %>
+              </p>
+              <div class="navbar-dropdown">
+                <p class="navbar-item">
                   <%= link_to 'マニュアル一覧', admin_manuals_path, class: 'navbar-item text-dark' %>
                 </p>
-                <p class="control">
+                <p class="navbar-item">
                   <%= link_to "従業員一覧", admin_employees_path, class: "navbar-item text-dark" %>
                 </p>
-                <p class="control">
-                  <%= link_to "質問一覧", admin_comments_path, class: "navbar-item text-dark" %>
-                </p>
-
-                <p class="control">
+                <hr class="navbar-divider">
+                <p class="navbar-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "navbar-item text-dark" %>
                 </p>
               </div>
             </div>
           </div>
         </div>
-      <% else %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <% else %>
+        <div id="menu" class="navbar-menu">
           <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <!--<p class="control">-->
-                <!--  <%= link_to 'アバウト', public_about_path, class: 'navbar-item text-dark' %>-->
-                <!--</p>-->
-                <p class="control">
-                  <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark' %>
-                </p>
-                <p class="control">
+            <p class="navbar-item">
+              <%= link_to employee_guest_sign_in_path, method: :post, class: "button is-primary is-inverted" do %>
+                <span class="icon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <span>従業員ゲストログイン（閲覧用）</span>
+              <% end %>
+            </p>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <p class="navbar-link">
+                <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark' %>
+              </p>
+              <div class="navbar-dropdown">
+                <p class="navbar-item">
                   <%= link_to "ログイン", new_employee_session_path, class: 'navbar-item text-dark' %>
                 </p>
-                <p class="control">
+                <p class="navbar-item">
                   <%= link_to "新規登録", new_employee_registration_path, class: 'navbar-item text-dark' %>
                 </p>
               </div>
             </div>
           </div>
         </div>
-      <% end %>
+        <% end %>
 
     </nav>
     <%= yield %>
+
   </body>
 </html>

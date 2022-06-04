@@ -18,3 +18,12 @@
 .notification:not(:last-child){
   margin-bottom: 0;
 }
+
+error_explanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
