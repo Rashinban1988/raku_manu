@@ -2,7 +2,13 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">
-        マニュアル：　<%= @manual.task_name %>
+        <% if @manual.learned?(current_employee) %>
+          <span class="has-text-success">
+            習得済み！
+          </span><br>
+        <% else %>
+        <% end %>
+        <%= @manual.genre.name %>： <%= @manual.task_name %>
       </h2>
     </div>
   </div>
@@ -11,18 +17,13 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-6">
+    <div class="columns">
+      <div class="column is-6 is-size-7-mobile">
 
-        <div class="field">
-          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-          <% if @manual.video.representable? %>
-            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-          <% else %>
-            <!--ダウンロードリンク-->
-            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-            <% end %>
+        <div class="field has-text-centered">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"),:autopictureinpicture => true, :playsinline => true, :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+          <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+            <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
           <% end %>
         </div>
 
@@ -51,7 +52,7 @@
         <%= form_with model: @comment, url: public_manuals_path, method: :post do |f| %>
           <%= f.hidden_field :manual_id %>
           <div class="field">
-          <%= f.label :comment, "質問内容", class: "label" %>
+          <%= f.label :comment, "質問：", class: "label" %>
           <%= f.text_area :comment, autofocus: true, autocomplete: "comment", :placeholder => "例:　〇〇のやり方がわからない", class: "input", row: "3" %>
           </div>
           <div class="field">
@@ -60,10 +61,10 @@
         <% end %>
 
         <div class="mt-3 mb-3">
-          <span>質問：<%= @comments.count %>件</span>
-          <span>習得人数：
+          <span class="has-text-centered">質問：<%= @comments.count %>件</span>
+          <span>　習得人数：
           <%= link_to public_is_learned_manual_learnings_path do %>
-            <span class="is-underlined">
+            <span class="is-underlined ">
               <%= @learnings.count %>人
             </span>
           <% end %>
@@ -83,16 +84,32 @@
 
         <% @comments.each do |comment| %>
           <div class="field">
-          <i class="fa fa-user"></i><%= comment.employee.name %>
-          <span class="has-text-info"><%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %></span>
-          <%= link_to public_comment_path(comment.id) do %>
-            <i class="fa fa-edit"></i><br>
-          <% end %>
-          <strong class="ml-3"><%= comment.comment %></strong><br>
-          <%= link_to "この質問に返信する", public_show_comments_employee_path(comment.id), class: "ml-3" %><br>
+            <i class="fa fa-user"></i>
+            <%= comment.employee.name %>
+            <span class="has-text-info">
+              <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+            </span>
+            <% if comment.employee_id == current_employee.id %>
+              <%= link_to public_comment_path(comment.id) do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
+            <% end %>
+            <% if comment.is_desolved == true %>
+              <span class="has-text-primary">
+                ～解決済み～
+              </span>
+            <% else %>
+              <span class="has-text-danger">
+                ～未解決～
+              </span>
+            <% end %><br>
+            <strong class="ml-3"><%= comment.comment %></strong>
+            <% if comment.updated_at != comment.created_at %>
+              <span class="is-size-7-desktop has-text-grey">※編集済み</span>
+            <% end %><br>
+            <%= link_to "この質問に返信する", public_show_comments_employee_path(comment.id), class: "ml-3" %><br>
           </div>
         <% end %>
-
 
       </div>
     </div>

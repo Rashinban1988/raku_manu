@@ -1,6 +1,8 @@
 class Public::ManualsController < ApplicationController
+  before_action :authenticate_employee!
+
   def index
-    @manuals = Manual.all
+    @manuals = Manual.all.order(id: :DESC)
     if params[:keyword].present?
       @genres = Genre.where("name LIKE ? ", "%#{params[:keyword]}%")
       @keyword = params[:keyword]
@@ -14,7 +16,7 @@ class Public::ManualsController < ApplicationController
     @manual = Manual.find(params[:id])
     @manuals = Manual.all
     @comment = @manual.comments.new
-    @comments = @manual.comments.all
+    @comments = @manual.comments.all.order(id: :DESC)
     @learning = @manual.learnings.new
     @learnings = @manual.learnings.all
   end
@@ -26,8 +28,8 @@ class Public::ManualsController < ApplicationController
       redirect_to public_manual_path(@comment.manual_id), notice: "質問を投稿しました"
     else
       @manual = @comment.manual
-      @manuals = Manual.all
-      @comments = Comment.all
+      @manuals = Manual.all.order(id: :DESC)
+      @comments = Comment.all.order(id: :DESC)
       flash[:alert] = "質問の投稿に失敗しました"
       render :show
       # redirect_to public_manual_path, alert: "質問の投稿に失敗しました"

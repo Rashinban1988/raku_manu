@@ -24,12 +24,11 @@
       </div>
     <% end %>
 
-    <nav class="navbar", role="navigation", aria-label="main navigation">
+    <nav class="navbar is-size-7-mobile", role="navigation", aria-label="main navigation">
         <div class="nafvbar-brand">
           <%= link_to root_path do %>
             <%= image_tag "raku_manu.png", :class => "img-logo" %>
           <% end %>
-          <%= link_to ".", new_admin_session_path, class: "text-dark"  %>
         </div>
 
         <a class="navbar-burger navbar-end", data-target="menu", role="button", aria-label="menu", aria-expanded="false">
@@ -39,7 +38,7 @@
         </a>
 
         <% if employee_signed_in? %>
-        <div id="menu" class="navbar-menu">
+        <div id="menu" class="navbar-menu is-size-7-mobile">
 
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable navbar-end">
@@ -65,7 +64,7 @@
           </div>
         </div>
         <% elsif admin_signed_in? %>
-        <div id="menu" class="navbar-menu">
+        <div id="menu" class="navbar-menu is-size-7-mobile">
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
               <p class="navbar-link">
@@ -90,10 +89,16 @@
           </div>
         </div>
         <% else %>
-        <div id="menu" class="navbar-menu">
+        <div id="menu" class="navbar-menu is-size-7-mobile">
           <div class="navbar-end">
             <p class="navbar-item">
-              <%= link_to employee_guest_sign_in_path, method: :post, class: "button is-primary is-inverted" do %>
+              <%= link_to new_admin_session_path, class: "button is-link is-outlined mr-2" do %>
+                <span class="icon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <span>管理者ログイン（テスト閲覧用）</span>
+              <% end %>
+              <%= link_to employee_guest_sign_in_path, method: :post, class: "button is-warning is-outlined" do %>
                 <span class="icon">
                   <i class="fa fa-user"></i>
                 </span>

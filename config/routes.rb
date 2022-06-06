@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-
-  namespace :admin do
-    get 'return_comments/create'
-  end
+  # デバイス関係------------------------------------------------------------
   devise_for :admin, controllers: {
     sessions:      "admin/sessions",
     passwords:     "admin/passwords",
@@ -15,26 +12,24 @@ Rails.application.routes.draw do
     registrations: "employee/registrations"
   }
 
+  # ゲストログイン------------------------------------------------------------
   devise_scope :employee do
     post "/employee/guest_sign_in", to: "employee/sessions#new_guest"
   end
 
+  # 管理者ページ----------------------------------------------------------------
   namespace :admin do
     get "top" => "homes#top", as: "top"
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :employees, only: [:index, :show, :edit, :update, :destroy]
-    resources :return_comments, only: [:index, :destroy]
-    resources :learnings, only: [:index]
+    resources :return_comments, only: [:destroy]
     resources :manuals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-
-    post "manuals/is_draft" => "manuals#is_draft", as: "is_draft_manuals"
-    patch "manuals/re_draft" => "manuals#re_draft", as: "re_draft_manuals"
   end
 
+  # 従業員ページ----------------------------------------------------------------
   root 'public/homes#top'
 
   namespace :public do
-
     post "/homes/guest_sign_in", to: "homes#new_guest"
     resources :employees, only: [:show, :edit, :update]
     resources :comments do
@@ -64,5 +59,4 @@ Rails.application.routes.draw do
     patch "learnings/is_learned" => "learnings#is_rearned", as: "is_learned_learnings"
   end
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

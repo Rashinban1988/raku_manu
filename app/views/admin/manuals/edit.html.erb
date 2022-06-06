@@ -1,7 +1,7 @@
 <section class="hero is-warning">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title">
+      <h2 class="is-size-5-mobile">
         マニュアル編集
       </h2>
     </div>
@@ -11,7 +11,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-6 is-size-7-mobile">
 
         <%= form_with model: @manual, url: admin_manual_path, method: :patch do |f| %>
 
@@ -48,10 +48,10 @@
 
           <div class="action">
             <span>
-              <%= f.submit "更新", class: "button is-small is-success" %>
+              <%= f.submit "　更新　", class: "button is-small is-success" %>
             </span>
             <span>
-              <%= link_to "削除する", admin_manual_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"} , class: "button is-small is-danger" %>
+              <%= link_to "　削除　", admin_manual_path, method: :delete, data: {confirm: "本当に削除してよろしいですか？"} , class: "button is-small is-danger" %>
             </span>
           </div>
 

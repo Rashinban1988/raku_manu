@@ -11,6 +11,10 @@ class Employee::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def after_sign_up_path_for(resource)
+    public_employee_path(current_employee)
+  end
+
   def sign_up_params
     params.require(:employee).permit(:name, :telephone_number, :email, :password, :password_confirmation)
   end

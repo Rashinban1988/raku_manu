@@ -23,6 +23,7 @@ class Admin::ManualsController < ApplicationController
 
   def show
     @manual = Manual.find(params[:id])
+    @comments = @manual.comments.all
   end
 
   def edit

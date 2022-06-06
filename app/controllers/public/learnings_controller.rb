@@ -1,4 +1,5 @@
 class Public::LearningsController < ApplicationController
+  before_action :authenticate_employee!
   before_action :ensure_current_user, {only: [:show,:edit, :update]}
 
   def ensure_current_user

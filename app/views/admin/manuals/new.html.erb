@@ -1,7 +1,7 @@
 <section class="hero is-warning">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title">
+      <h2 class="is-size-5-mobile">
         マニュアル登録
       </h2>
     </div>
@@ -11,7 +11,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-6 is-size-7-mobile">
 
         <%= form_with model: @manual, url: admin_manuals_path, method: :post do |f| %>
         <%= render "layouts/error_messages", resource: @manual %>

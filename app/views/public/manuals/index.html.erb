@@ -1,7 +1,7 @@
 <section class="hero is-warning">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title">
+      <h2 class="is-size-5-mobile">
         マニュアル一覧
       </h2>
     </div>
@@ -11,12 +11,12 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-6 is-size-7-mobile">
 
         <div class="field">
           <%= form_with url: public_manuals_path, local: true, method: :get do |f| %>
-            <%= f.label :キーワード、又は登録ジャンルから検索, class: "label" %>
-            <%= f.text_field :keyword, placeholder: "例:　分析" %>
+            <%= f.label :"業務名検索：キーワード or 登録情報から", class: "label" %>
+            <%= f.text_field :keyword, placeholder: "すべて" %>
             <%= f.submit "検索", class: "button is-small is-success" %>
           <% end %>
         </div>
@@ -30,11 +30,11 @@
         <div class="field">
           <p>
             <% if @keyword == Genre.all %>
-              <span>”オール"</span>
+              <span>すべて</span>
             <% else %>
               "<%= @keyword %>"
             <% end %>
-            での検索結果
+            の検索結果
           </p>
         </div>
 
@@ -44,6 +44,7 @@
               <th>業務</th>
               <th>タスク</th>
               <th>更新日</th>
+              <th>習得</th>
             </tr>
           </thead>
           <% @genres.each do |genre| %>
@@ -58,6 +59,17 @@
                       <% end %>
                     </td>
                     <td><%= manual.updated_at.strftime("%Y/%m/%d") %></td>
+                    <td>
+                      <% if manual.learned?(current_employee) %>
+                        <span class="has-text-primary">
+                          済
+                        </span>
+                      <% else %>
+                        <span class="has-text-danger">
+                          未
+                        </span>
+                      <% end %>
+                    </td>
                   </tr>
                 </tbody>
               <% else %>

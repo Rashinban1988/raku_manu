@@ -1,8 +1,8 @@
 <section class="hero is-warning">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title">
-        「<%= @manual.task_name %>」
+      <h2 class="is-size-5-mobile">
+        <%= @manual.genre.name %>「<%= @manual.task_name %>」
       </h2>
     </div>
   </div>
@@ -11,17 +11,12 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-6 is-size-7-mobile">
 
-        <div class="field">
-          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"), :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-          <% if @manual.video.representable? %>
-            <%= video_tag  @manual.video.representation(resize_to_limit: [100, 100]) %>
-          <% else %>
-            <!--ダウンロードリンク-->
-            <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
-              <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
-            <% end %>
+        <div class="field has-text-centered">
+          <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"),:playsinline => true, :controls => true, :autoplay => true, :muted => true, :size => "200" %>
+          <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+            <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
           <% end %>
         </div>
 
@@ -74,9 +69,30 @@
 
         <div>
           <span>
-            <%= link_to "編集する", edit_admin_manual_path, class: "button is-small is-success" %>
+            <%= link_to "編集する", edit_admin_manual_path, class: "button is-small is-success mb-3" %>
           </span>
         </div>
+
+        <% @comments.each do |comment| %>
+          <div class="field">
+            <i class="fa fa-user"></i>
+            <%= comment.employee.name %>
+            <span class="has-text-info">
+              <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
+            </span>
+            <% if comment.is_desolved == true %>
+              <span class="has-text-primary">
+                ～解決済み～
+              </span>
+            <% else %>
+              <span class="has-text-danger">
+                ～未解決～
+              </span>
+            <% end %><br>
+            <strong class="ml-3"><%= comment.comment %></strong><br>
+
+          </div>
+        <% end %>
 
 
       </div>

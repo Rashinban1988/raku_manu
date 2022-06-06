@@ -4,7 +4,7 @@
     <nav class="navbar", role="navigation", aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand  columns is-desktop">
-          <div class ="title column is-marginless">
+          <div class ="is-size-5-mobile column is-marginless">
             マニュアル一覧
           </div>
           <div class="column navbar-end">
@@ -25,7 +25,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-6 is-size-7-mobile">
 
         <table class="table">
           <thead class="bg-light">
@@ -33,6 +33,7 @@
               <th>業務</th>
               <th>タスク</th>
               <th>更新日</th>
+              <th>投稿</th>
             </tr>
           </thead>
           <% @manuals.each do |manual| %>
@@ -44,7 +45,18 @@
                 <%= manual.task_name %>
                 <% end %>
               </td>
-              <td><%= manual.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td><%= manual.updated_at.strftime("%Y/%m/%d") %></td>
+              <td>
+                <% if manual.is_draft == true %>
+                  <span class="has-text-danger">
+                    下書き中
+                  </span>
+                <% else %>
+                  <span class="has-text-primary">
+                    投稿済み
+                  </span>
+                <% end %>
+              </td>
             </tr>
           </tbody>
           <% end %>

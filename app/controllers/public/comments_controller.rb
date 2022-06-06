@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_employee!
   before_action :ensure_current_user, {only: [:show, :update, :create, :is_desolved]}
 
   def ensure_current_user
