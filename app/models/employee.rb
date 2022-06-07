@@ -12,8 +12,10 @@ class Employee < ApplicationRecord
   validates :telephone_number, presence: true
 
   def self.guest
-    Employee.find_or_create_by(email: "guest@example.com") do |employee|
+    find_or_create_by!(email: "guest@example.com") do |employee|
       employee.password = SecureRandom.urlsafe_base64
+      employee.name = "ゲストユーザー"
+      employee.telephone_number = "09090909090"
         # employee.confirmed_ad = Time.now
     end
   end
