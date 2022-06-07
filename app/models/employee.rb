@@ -13,7 +13,7 @@ class Employee < ApplicationRecord
 
   def self.guest
     find_or_create_by!(email: "guest@example.com") do |employee|
-      employee.password = SecureRandom.urlsafe_base64
+      employee.password = SecureRandom.alphanumeric(10) + [*'a'..'z'].sample(1).join + [*'0'..'9'].sample(1).join
       employee.name = "ゲストユーザー"
       employee.telephone_number = "09090909090"
         # employee.confirmed_ad = Time.now
