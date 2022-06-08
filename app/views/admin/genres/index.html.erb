@@ -10,7 +10,7 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
+    <div class="columns">
       <div class="column is-6 is-size-7-mobile">
 
         <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
@@ -29,32 +29,29 @@
           </div>
         <% end %>
 
-        <section class="hero is-small is-link m-4">
-          <div class="hero-body">
-            <div class="container">
-              <h2 class="is-size-5-mobile is-centered">
-                業務一覧
-              </h2>
-            </div>
-          </div>
-        </section>
-
-        <div>
-          <div class="columns is-multiline is-mobile">
-            <% @genres.each do |genre| %>
-              <div class="column is-full">
-                <%= link_to edit_admin_genre_path(genre), data: {"turbolinks" => false} do %>
-                  <span class="is-centered">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-edit"></i>
+        <table class="table is-striped is-fullwidth">
+          <thead class="bg-light">
+            <tr>
+              <th>業務</th>
+            </tr>
+          </thead>
+          <% @genres.each do |genre| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to edit_admin_genre_path(genre), data: {"turbolinks" => false} do %>
+                    <span class="is-centered">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      <%= genre.name %>
                     </span>
-                    <%= genre.name %>
-                  </span>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
 
       </div>
     </div>
