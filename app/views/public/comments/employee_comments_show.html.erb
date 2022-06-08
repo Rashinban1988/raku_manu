@@ -21,7 +21,7 @@
 
         <div class="field has-text-centered">
           <%= video_tag rails_blob_path(@manual.video, disposition: "atattchment"),:playsinline => true, :controls => true, :autoplay => true, :muted => true, :size => "200" %>
-          <%= link_to rails_blob_path(@manual.video, disposition: "attachment") do %>
+          <%= link_to rails_blob_path(@manual.video, disposition: "attachment"), data: {"turbolinks" => false} do %>
             <%= image_tag "download.png", alt: "Download file", :size => "100", :class => "fa fa-download" %>
           <% end %>
         </div>
@@ -31,7 +31,7 @@
           <%= @comment.employee.name %>
           <span class="has-text-info"><%= @comment.created_at.strftime("%Y/%m/%d/%H:%M") %></span>
           <% if @comment.employee_id == current_employee.id %>
-            <%= link_to public_comment_path(@comment.id) do %>
+            <%= link_to public_comment_path(@comment.id), data: {"turbolinks" => false} do %>
               <i class="fa fa-edit"></i>
             <% end %>
           <% end %><br>
@@ -54,7 +54,7 @@
           <% if @comment.employee_id == current_employee.id %>
             <% if @comment.is_desolved == false %>
               <%= f.hidden_field :is_desolved => false %>
-              <button class="button is-success is-outlined is-small ">
+              <button class="button is-success is-outlined">
                 <span>
                   <% f.submit %>
                 </span>
@@ -65,7 +65,7 @@
               </button>
             <% else %>
               <%= f.hidden_field :is_desolved => true %>
-              <button class="button is-success is-small ">
+              <button class="button is-success ">
                 <span>
                   <% f.submit %>
                 </span>

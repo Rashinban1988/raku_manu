@@ -8,7 +8,7 @@
             マニュアル一覧
           </div>
           <div class="column navbar-end">
-            <%= link_to new_admin_manual_path,method: :get, class: "button is-primary is-inverted" do %>
+            <%= link_to new_admin_manual_path,method: :get, class: "button is-primary is-inverted", data: {"turbolinks" => false} do %>
             <span class="column navbar-end">
               <i class="fa fa-camera"></i>
             </span>
@@ -41,7 +41,7 @@
             <tr>
               <td><%= manual.genre.name %></td>
               <td>
-                <%= link_to admin_manual_path(manual.id) do %>
+                <%= link_to admin_manual_path(manual.id), data: {"turbolinks" => false} do %>
                 <%= manual.task_name %>
                 <% end %>
               </td>

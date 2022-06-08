@@ -19,7 +19,7 @@
               <th>質問日</th>
               <th>タスク名</th>
               <th>質問内容</th>
-              <th>解決ステータス</th>
+              <th>解決</th>
             </tr>
           </thead>
           <% @comments.each do |comment| %>
@@ -30,17 +30,17 @@
                 <%= comment.manual.task_name %>
               </td>
               <td>
-                <%= link_to public_show_comments_employee_path(comment.id) do %>
+                <%= link_to public_show_comments_employee_path(comment.id), data: {"turbolinks" => false} do %>
                   <%= comment.comment %>
                 <% end %>
               </td>
               <% if comment.is_desolved == true %>
                 <td class="text-success">
-                  解決
+                  済
                 </td>
               <% else %>
                 <td class="text-secondary">
-                  未解決
+                  未
                 </td>
               <% end %>
             </tr>

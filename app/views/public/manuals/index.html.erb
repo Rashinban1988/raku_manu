@@ -54,7 +54,7 @@
                   <tr>
                     <td><%= manual.genre.name %></td>
                     <td>
-                      <%= link_to public_manual_path(manual.id) do %>
+                      <%= link_to public_manual_path(manual.id), data: {"turbolinks" => false} do %>
                       <%= manual.task_name %>
                       <% end %>
                     </td>

@@ -32,7 +32,7 @@
             <span>
               <%= @employee.name %>
             </span>
-            <%= link_to edit_admin_employee_path do %>
+            <%= link_to edit_admin_employee_path, data: {"turbolinks" => false} do %>
             <span class="icon is-small is-left">
               <i class="fas fa-edit"></i>
             </span>

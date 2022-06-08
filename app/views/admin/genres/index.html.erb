@@ -43,7 +43,7 @@
           <div class="columns is-multiline is-mobile">
             <% @genres.each do |genre| %>
               <div class="column is-full">
-                <%= link_to edit_admin_genre_path(genre) do %>
+                <%= link_to edit_admin_genre_path(genre), data: {"turbolinks" => false} do %>
                   <span class="is-centered">
                     <span class="icon is-small is-left">
                       <i class="fas fa-edit"></i>

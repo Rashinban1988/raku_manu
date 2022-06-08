@@ -27,7 +27,7 @@
             <tr>
               <td><%= employee.id %></td>
               <td>
-                <%= link_to admin_employee_path(employee.id) do %>
+                <%= link_to admin_employee_path(employee.id), data: {"turbolinks" => false} do %>
                 <%= employee.name %>
                 <% end %>
               </td>
