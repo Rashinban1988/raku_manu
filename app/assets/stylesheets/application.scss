@@ -30,6 +30,26 @@ error_explanation {
 
 .img-logo {
   width: 200px;
-  height: 101px;
+  height: 100px;
   object-fit: cover;
+}
+
+.nav.navbar {
+  padding: none;
+}
+
+.navbar-dropdown > p {
+  margin: 0;
+}
+
+.has-dropdown > p {
+  margin: 0;
+}
+
+.hero-body {
+  padding: 1.5rem;
+}
+
+.section {
+  padding: 0.5rem 1.5rem;
 }
