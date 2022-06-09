@@ -27,7 +27,6 @@ class Public::ManualsController < ApplicationController
     if @comment.save
       redirect_to public_manual_path(@comment.manual_id), notice: "質問を投稿しました"
     else
-      @manual = @comment.manual
       @manuals = Manual.all.order(id: :DESC)
       @comments = Comment.all.order(id: :DESC)
       flash[:alert] = "質問の投稿に失敗しました"
