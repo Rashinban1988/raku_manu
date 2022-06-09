@@ -42,9 +42,9 @@
 
           <div class="field">
             <%= f.radio_button :is_draft, "true" %>
-            <%= f.label :is_draft, "下書き" %>
+            <%= f.label :is_draft, "下書き", value: :true %>
             <%= f.radio_button :is_draft, "false" %>
-            <%= f.label :is_draft, "投稿" %><br>
+            <%= f.label :is_draft, "投稿", value: :false  %><br>
           </div>
 
           <div class="action">
