@@ -8,6 +8,8 @@ class Manual < ApplicationRecord
 
   has_one_attached :video
 
+  validates :task_name, presence: true
+
   validate :video_size, :video_type
 
   def video_size
