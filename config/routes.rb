@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # 従業員ページ----------------------------------------------------------------
   root 'public/homes#top'
 
-  scope module: :public do
+  namespace :public do
     post "/homes/guest_sign_in", to: "homes#new_guest"
     resources :employees, only: [:show, :edit, :update]
     resources :comments do
