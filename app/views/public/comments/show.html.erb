@@ -13,7 +13,7 @@
     <div class="columns is-centered">
       <div class="column is-6 is-size-7-mobile">
 
-        <%= form_with model: @comment, url: public_comment_path, method: :patch do |f| %>
+        <%= form_with model: @comment, url: comment_path, method: :patch do |f| %>
           <div class="field">
             <%= f.label :comment, "コメント修正：", class: "label" %>
             <p class="control has-icons-left">

@@ -14,7 +14,7 @@
       <div class="column is-6 is-size-7-mobile">
 
         <div class="field">
-          <%= form_with url: public_comments_path, local: true, method: :get do |f| %>
+          <%= form_with url: comments_path, local: true, method: :get do |f| %>
             <%= f.select :keyword, {"解決": 1, "未解決": 0}, {include_blank: "すべて"}, { class: "form-control mb-2"} %>
             <%= f.submit "検索", class: "button is-success" %>
           <% end %>
@@ -51,7 +51,7 @@
                 <%= comment.manual.task_name %>
               </td>
               <td>
-                <%= link_to public_show_comments_employee_path(comment.id), data: {"turbolinks" => false} do %>
+                <%= link_to show_comments_employee_path(comment.id), data: {"turbolinks" => false} do %>
                   <%= comment.comment %>
                 <% end %>
               </td>

@@ -33,6 +33,7 @@ class Admin::ManualsController < ApplicationController
 
   def update
     @manual = Manual.find(params[:id])
+    @genres = Genre.all
     if @manual.update(manual_params)
       redirect_to admin_manual_path(@manual), notice: "マニュアルを更新しました"
     else

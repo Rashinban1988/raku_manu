@@ -48,13 +48,13 @@
               </p>
               <div class="navbar-dropdown">
                 <p class="navbar-item">
-                <%= link_to 'マイページ', public_employee_path(current_employee.id), class: 'navbar-item', data: {"turbolinks" => false} %>
+                <%= link_to 'マイページ', employee_path(current_employee.id), class: 'navbar-item', data: {"turbolinks" => false} %>
                 </p>
                 <p class="navbar-item">
-                  <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark', data: {"turbolinks" => false} %>
+                  <%= link_to 'マニュアル一覧', manuals_path, class: 'navbar-item text-dark', data: {"turbolinks" => false} %>
                 </p>
                 <p class="navbar-item">
-                  <%= link_to "質問一覧", public_comments_path, class: "navbar-item text-dark", data: {"turbolinks" => false} %>
+                  <%= link_to "質問一覧", comments_path, class: "navbar-item text-dark", data: {"turbolinks" => false} %>
                 </p>
                 <hr class="navbar-divider">
                 <p class="navbar-item">
@@ -112,7 +112,7 @@
               </p>
               <div class="navbar-dropdown">
                 <p class="navbar-item">
-                  <%= link_to 'マニュアル一覧', public_manuals_path, class: 'navbar-item text-dark', data: {"turbolinks" => false} %>
+                  <%= link_to 'マニュアル一覧', manuals_path, class: 'navbar-item text-dark', data: {"turbolinks" => false} %>
               </p>
                 <p class="navbar-item">
                   <%= link_to "ログイン", new_employee_session_path, class: 'navbar-item text-dark', data: {"turbolinks" => false} %>

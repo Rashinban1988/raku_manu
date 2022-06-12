@@ -31,7 +31,7 @@
           <%= @comment.employee.name %>
           <span class="has-text-info"><%= @comment.created_at.strftime("%Y/%m/%d/%H:%M") %></span>
           <% if @comment.employee_id == current_employee.id %>
-            <%= link_to public_comment_path(@comment.id), data: {"turbolinks" => false} do %>
+            <%= link_to comment_path(@comment.id), data: {"turbolinks" => false} do %>
               <i class="fa fa-edit"></i>
             <% end %>
           <% end %><br>
@@ -48,7 +48,7 @@
           <% end %>
         </div>
 
-        <%= form_with model: @comment, url: public_is_desolved_comments_path, method: :patch do |f| %>
+        <%= form_with model: @comment, url: is_desolved_comments_path, method: :patch do |f| %>
           <%= f.hidden_field :manual_id %>
           <%= f.hidden_field :comment %>
           <% if @comment.employee_id == current_employee.id %>
@@ -79,7 +79,7 @@
         <% end %>
 
         <div class="field mt-3">
-          <%= form_with model: @return_comment, url: public_create_return_comments_path do |f| %>
+          <%= form_with model: @return_comment, url: create_return_comments_path do |f| %>
             <%= f.hidden_field :comment_id %>
             <%= f.hidden_field :employee_id %>
             <div class="field">

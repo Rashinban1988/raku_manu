@@ -22,7 +22,7 @@
 
           <div class="field">
             <%= f.label :業務名, class: "label" %>
-            <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name) %>
+            <%= f.select :genre_id, options_from_collection_for_select(@genres.all, :id, :name, @manual.genre_id) %>
           </div>
 
           <div class="field">

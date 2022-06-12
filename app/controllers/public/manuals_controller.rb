@@ -25,13 +25,9 @@ class Public::ManualsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.employee_id = current_employee.id
     if @comment.save
-      redirect_to public_manual_path(@comment.manual_id), notice: "質問を投稿しました"
+      redirect_to manual_path(@comment.manual_id), notice: "質問を投稿しました"
     else
-      @manuals = Manual.all.order(id: :DESC)
-      @comments = Comment.all.order(id: :DESC)
-      flash[:alert] = "質問の投稿に失敗しました"
-      render :show
-      # redirect_to public_manual_path, alert: "質問の投稿に失敗しました"
+      redirect_to manual_path(@comment.manual_id), alert: "質問の投稿に失敗しました"
     end
   end
 

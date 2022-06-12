@@ -28,7 +28,7 @@ class Public::CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to public_manual_path(@comment.manual), notice: "質問内容を編集しました"
+      redirect_to manual_path(@comment.manual), notice: "質問内容を編集しました"
     else
       @comment = Comment.find(params[:id])
       flash[:alert] = "編集に失敗しました"
@@ -59,7 +59,7 @@ class Public::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to public_manual_path, notice: "質問を投稿しました"
+      redirect_to manual_path, notice: "質問を投稿しました"
     else
       flash[:alert] = "質問の投稿に失敗しました"
       render :show
@@ -75,7 +75,7 @@ class Public::CommentsController < ApplicationController
       @comment.is_desolved = true
     end
     if @comment.update(comment_params)
-      redirect_to public_show_comments_employee_path
+      redirect_to show_comments_employee_path
     else
       @comment = Comment.find(params[:id])
       @return_comment = @comment.return_comments.new
@@ -90,7 +90,7 @@ class Public::CommentsController < ApplicationController
     @return_comment = ReturnComment.new(return_comment_params)
     @return_comment.employee_id = current_employee.id
     if @return_comment.save
-      redirect_to public_show_comments_employee_path(@return_comment.comment_id), notice: "質問への返信を投稿しました"
+      redirect_to show_comments_employee_path(@return_comment.comment_id), notice: "質問への返信を投稿しました"
     else
       @comment = Comment.find(params[:id])
       @return_comment = @comment.return_comments.new

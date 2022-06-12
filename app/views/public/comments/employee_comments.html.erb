@@ -30,7 +30,7 @@
                 <%= comment.manual.task_name %>
               </td>
               <td>
-                <%= link_to public_show_comments_employee_path(comment.id), data: {"turbolinks" => false} do %>
+                <%= link_to show_comments_employee_path(comment.id), data: {"turbolinks" => false} do %>
                   <%= comment.comment %>
                 <% end %>
               </td>

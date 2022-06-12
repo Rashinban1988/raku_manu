@@ -14,7 +14,7 @@ class Manual < ApplicationRecord
   validate :video_size, :video_type
 
   def video_size
-    if video.blob.byte_size > 1.megabytes
+    if video.blob.byte_size > 60.megabytes
       errors.add(:video, "動画を60MG以内で撮影しなおして下さい（約３分以内）")
     end
   end

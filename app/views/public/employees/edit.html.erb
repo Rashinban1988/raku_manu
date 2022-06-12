@@ -12,7 +12,7 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-6 is-size-7-mobile">
-        <%= form_with model: @employee, url: public_employee_path, method: :patch do |f| %>
+        <%= form_with model: @employee, url: employee_path, method: :patch do |f| %>
         <div class="field">
           <%= f.label :name, class: "label" %>
           <p class="control has-icons-left">

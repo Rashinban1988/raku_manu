@@ -34,11 +34,11 @@ class Employee::SessionsController < Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-    public_employee_path(current_employee)
+    employee_path(current_employee)
   end
 
   def after_sign_up_path_for(resource)
-    public_employee_path(current_employee)
+    employee_path(current_employee)
   end
 
 end

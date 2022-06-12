@@ -9,7 +9,7 @@ class Public::EmployeesController < ApplicationController
       redirect_to("/")
     end
   end
-  
+
   def show
     @employee = Employee.find(params[:id])
   end
@@ -25,7 +25,7 @@ class Public::EmployeesController < ApplicationController
       #   @employee.learnings.update_all(is_active: true)
       #   @employee.comments.update_all(is_active: true)
       # end
-      redirect_to public_employee_path, notice: "従業員情報を更新しました"
+      redirect_to employee_path, notice: "従業員情報を更新しました"
     else
       flash[:alert] = "従業員情報の更新に失敗しました"
       render :edit

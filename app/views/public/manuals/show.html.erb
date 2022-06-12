@@ -49,7 +49,7 @@
         </div>
 
 
-        <%= form_with model: @comment, url: public_manuals_path, method: :post do |f| %>
+        <%= form_with model: @comment, url: manuals_path, method: :post do |f| %>
           <%= f.hidden_field :manual_id %>
           <div class="field">
           <%= f.label :comment, "質問：", class: "label" %>
@@ -63,7 +63,7 @@
         <div class="mt-3 mb-3">
           <span class="has-text-centered">質問：<%= @comments.count %>件</span>
           <span>　習得人数：
-          <%= link_to public_is_learned_manual_learnings_path, data: {"turbolinks" => false} do %>
+          <%= link_to is_learned_manual_learnings_path, data: {"turbolinks" => false} do %>
             <span class="is-underlined ">
               <%= @learnings.count %>人
             </span>
@@ -71,11 +71,11 @@
           </span>
           <span class="ml-3">
             <% if @manual.learned?(current_employee) %>
-              <%= link_to public_manual_learnings_path(@manual.id), class: "button is-small is-primary", method: :delete, data: {"turbolinks" => false} do %>
+              <%= link_to manual_learnings_path(@manual.id), class: "button is-small is-primary", method: :delete, data: {"turbolinks" => false} do %>
                 習得済み！
               <% end %>
             <% else %>
-              <%= link_to public_manual_learnings_path(@manual.id), class: "button is-primary is-small is-outlined", method: :post, data: {"turbolinks" => false} do %>
+              <%= link_to manual_learnings_path(@manual.id), class: "button is-primary is-small is-outlined", method: :post, data: {"turbolinks" => false} do %>
                 習得！
               <% end %>
             <% end %>
@@ -90,7 +90,7 @@
               <%= comment.created_at.strftime("%Y/%m/%d/%H:%M") %>
             </span>
             <% if comment.employee_id == current_employee.id %>
-              <%= link_to public_comment_path(comment.id), data: {"turbolinks" => false} do %>
+              <%= link_to comment_path(comment.id), data: {"turbolinks" => false} do %>
                 <i class="fa fa-edit"></i>
               <% end %>
             <% end %>
@@ -107,7 +107,7 @@
             <% if comment.updated_at != comment.created_at %>
               <span class="is-size-7-desktop has-text-grey">※編集済み</span>
             <% end %><br>
-            <%= link_to "この質問に返信する", public_show_comments_employee_path(comment.id), class: "ml-3", data: {"turbolinks" => false} %><br>
+            <%= link_to "この質問に返信する", show_comments_employee_path(comment.id), class: "ml-3", data: {"turbolinks" => false} %><br>
           </div>
         <% end %>
 

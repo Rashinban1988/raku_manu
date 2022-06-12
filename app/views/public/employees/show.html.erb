@@ -32,7 +32,7 @@
             <span>
               <%= @employee.name %>
             </span>
-            <%= link_to edit_public_employee_path, data: {"turbolinks" => false} do %>
+            <%= link_to edit_employee_path, data: {"turbolinks" => false} do %>
             <span class="icon is-small is-left">
               <i class="fas fa-edit"></i>
             </span>
@@ -70,13 +70,13 @@
 
         <div class="field">
           <span>
-            <%= link_to "質問内容一覧を見る", public_comments_employee_path, class: "button is-success", data: {"turbolinks" => false} %>
+            <%= link_to "質問内容一覧を見る", comments_employee_path, class: "button is-success", data: {"turbolinks" => false} %>
           </span>
         </div>
 
         <div class="field">
           <span>
-            <%= link_to "習得業務一覧を見る", public_learnings_employee_path, class: "button is-success", data: {"turbolinks" => false} %>
+            <%= link_to "習得業務一覧を見る", learnings_employee_path, class: "button is-success", data: {"turbolinks" => false} %>
           </span>
         </div>
 

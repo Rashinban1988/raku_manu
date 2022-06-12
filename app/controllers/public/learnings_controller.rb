@@ -18,13 +18,13 @@ class Public::LearningsController < ApplicationController
   def create
     @manual_learning = Learning.new(employee_id: current_employee.id, manual_id: params[:manual_id])
     @manual_learning.save
-    redirect_to public_manual_path(params[:manual_id])
+    redirect_to manual_path(params[:manual_id])
   end
 
   def destroy
     @manual_learning = Learning.find_by(employee_id: current_employee.id, manual_id: params[:manual_id])
     @manual_learning.destroy
-    redirect_to public_manual_path(params[:manual_id])
+    redirect_to manual_path(params[:manual_id])
   end
 
 # 　習得スタッフ一覧用
@@ -42,7 +42,7 @@ class Public::LearningsController < ApplicationController
       @learning.is_learned = true
     end
     if @learning.update(learning_params)
-      redirect_to public_manual_path(@learning.manual_id)
+      redirect_to manual_path(@learning.manual_id)
     else
       @manual = Manual.find(params[:id])
       @manuals = Manual.all
