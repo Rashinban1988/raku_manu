@@ -1,3 +1,4 @@
+<%= render "layouts/error_messages", resource: @manual %>
 <section class="hero is-warning">
   <!-- Hero head: will stick at the top -->
   <div class="hero-body">
@@ -8,12 +9,12 @@
             マニュアル一覧
           </div><br>
           <div class="column navbar-end">
-            <%= link_to new_admin_manual_path,method: :get, class: "button is-primary is-inverted", data: {"turbolinks" => false} do %>
-            <span class="column navbar-end">
-              <i class="fa fa-camera"></i>
-            </span>
-            <span>マニュアル新規作成</span>
-            <% end%>
+            <div class=" navbar-end button is-primary is-inverted" data-toggle="modal" data-target="#exampleModal">
+              <span class="column navbar-end">
+                <i class="fa fa-camera"></i>
+              </span>
+              <span>マニュアル新規作成</span>
+            </div>
           </div>
         </div>
       </div>
@@ -21,6 +22,67 @@
   </div>
 </section>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-6 is-size-7-mobile">
+
+              <%= form_with model: [@manual, @genre], url: admin_manuals_path, method: :post do |f| %>
+
+                <div class="field">
+                  <%= f.label :動画, class: "label" %>
+                  <%= f.file_field :video %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :業務名, class: "label" %>
+                  <%= f.select :genre_id, options_from_collection_for_select(@genres, :id, :name) %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :タスク名, class: "label" %>
+                  <p>
+                    <%= f.text_field :task_name, autofocus: true, autocomplete: "task_name", :placeholder => "例:　レジ精算の操作方法　|　日報の書き方", class: "input" %>
+                  </p>
+                </div>
+
+                <div class="field">
+                  <%= f.label :説明文, class: "label" %>
+                  <p>
+                    <%= f.text_area :description, autofocus: true, autocomplete: "description", :placeholder => "例:　レジ精算の時に出てくるレシートは捨てないでください　｜　日報を書いたら間違いがないかチェックをすること", class: "textarea", rows:"3" %>
+                  </p>
+                </div>
+
+                <div class="field">
+                  <%= f.radio_button :is_draft, "true" %>
+                  <%= f.label :is_draft, "下書き", value: :true %>
+                  <%= f.radio_button :is_draft, "false" %>
+                  <%= f.label :is_draft, "投稿", value: :false  %><br>
+                </div>
+
+                <div class="action">
+                  <%= f.submit "新規登録", class: "button is-small is-success" %>
+                </div>
+
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
 
 <section class="section">
   <div class="container">

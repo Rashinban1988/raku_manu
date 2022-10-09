@@ -3,6 +3,9 @@ class Admin::ManualsController < ApplicationController
 
   def index
     @manuals = Manual.all
+    @manual = Manual.new
+    @genres = Genre.all
+    @genre = Genre.new
   end
 
   def new
@@ -12,12 +15,13 @@ class Admin::ManualsController < ApplicationController
 
   def create
     @manual = Manual.new(manual_params)
-    if @manual.save
+    if @manual.save && @genre.sava
       redirect_to admin_manuals_path, notice: "マニュアルを投稿しました"
     else
+      @manuals = Manual.all
       @genres = Genre.all
       flash[:alert] = "マニュアルの投稿に失敗しました"
-      render :new
+      render :index
     end
   end
 
@@ -53,7 +57,7 @@ class Admin::ManualsController < ApplicationController
   private
 
   def manual_params
-    params.require(:manual).permit(:task_name, :description, :is_draft, :genre_id, :video, :re_draft)
+    params.require(:manual).permit(:genre_name, :task_name, :description, :is_draft, :genre_id, :video, :re_draft)
   end
 
 end
